@@ -1,0 +1,54 @@
+        """{{#isDeprecated}}(Deprecated) {{/isDeprecated}}{{{summary}}}{{^summary}}{{operationId}}{{/summary}}
+
+{{#unescapedNotes}}
+{{{.}}}
+{{/unescapedNotes}}
+
+{{#allParams}}
+{{^vendorExtensions.x-optimeering-pagination-parameter.value}}
+{{! IGNORE ALL PAGINATION PARAMTERS}}
+:param {{paramName}}:{{#description}} {{{.}}}{{/description}}{{#required}} (required){{/required}}{{#optional}}(optional){{/optional}}
+{{^vendorExtensions.x-optimeering-comma-separated.data-type}}
+{{! DEFAULT CASE FROM OPENAPI GENERATOR}}
+:type {{paramName}}: {{!
+}}{{#vendorExtensions.x-optimeering-alternate-typing.type}}{{!
+    }}{{{vendorExtensions.x-optimeering-alternate-typing.type}}}{{!
+}}{{/vendorExtensions.x-optimeering-alternate-typing.type}}{{!
+}}{{^vendorExtensions.x-optimeering-alternate-typing.type}}{{!
+    }}{{dataType}}{{!
+}}{{/vendorExtensions.x-optimeering-alternate-typing.type}}{{!
+}}{{#optional}}, optional{{/optional}}
+{{/vendorExtensions.x-optimeering-comma-separated.data-type}}
+{{#vendorExtensions.x-optimeering-comma-separated.data-type}}
+{{! OPTIMEERING PYTHON TYPE OVERWRITE}}
+:type {{paramName}}: {{vendorExtensions.x-optimeering-comma-separated.data-type}}{{#optional}}, optional{{/optional}}
+{{/vendorExtensions.x-optimeering-comma-separated.data-type}}
+{{/vendorExtensions.x-optimeering-pagination-parameter.value}}
+{{/allParams}}
+:return: Returns the result object.
+:rtype: {{returnType}}
+
+{{>example_api}}
+        """ # noqa: E501
+        {{#isDeprecated}}
+        warnings.warn("{{{httpMethod}}} {{{path}}} is deprecated.", DeprecationWarning)
+        {{/isDeprecated}}
+
+        _param = self._{{operationId}}_serialize(
+            {{#allParams}}
+            {{^vendorExtensions.x-optimeering-pagination-parameter.value}}
+            {{paramName}}={{paramName}},
+            {{/vendorExtensions.x-optimeering-pagination-parameter.value}}
+            {{#vendorExtensions.x-optimeering-pagination-parameter.value}}
+            {{paramName}}=None,
+            {{/vendorExtensions.x-optimeering-pagination-parameter.value}}
+            {{/allParams}}
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            {{#responses}}
+            {{^isWildcard}}
+            '{{code}}': {{#dataType}}"{{.}}"{{/dataType}}{{^dataType}}None{{/dataType}},
+            {{/isWildcard}}
+            {{/responses}}
+        }

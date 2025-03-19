@@ -1,0 +1,32 @@
+        """{{#isDeprecated}}(Deprecated) {{/isDeprecated}}{{{summary}}}{{^summary}}{{operationId}}{{/summary}}
+  
+{{#unescapedNotes}}
+{{{.}}}
+{{/unescapedNotes}}
+
+{{#allParams}}
+:param {{paramName}}:{{#description}} {{{.}}}{{/description}}{{#required}} (required){{/required}}{{#optional}}(optional){{/optional}}
+:type {{paramName}}: {{dataType}}{{#optional}}, optional{{/optional}}
+{{/allParams}}
+:return: Returns the result object.
+:rtype: {{returnType}}
+
+{{>example_api}}
+        """ # noqa: E501
+        {{#isDeprecated}}
+        warnings.warn("{{{httpMethod}}} {{{path}}} is deprecated.", DeprecationWarning)
+        {{/isDeprecated}}
+
+        _param = self._{{operationId}}_serialize(
+            {{#allParams}}
+            {{paramName}}={{paramName}},
+            {{/allParams}}
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            {{#responses}}
+            {{^isWildcard}}
+            '{{code}}': {{#dataType}}"{{.}}"{{/dataType}}{{^dataType}}None{{/dataType}},
+            {{/isWildcard}}
+            {{/responses}}
+        }
