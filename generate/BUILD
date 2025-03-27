@@ -9,8 +9,8 @@ resource(
     name="openapi-schema",
     source=http_source(
         url="https://app.optimeering.com/api/docs/openapi.json",
-        sha256="56041b32ab6092c82ed7741a6d7243e9e4786eb7a15b89c4e2312e047fc882d9",
-        len=109505,
+        sha256="d3a3c880b29e27d9a6e875ed07583889ff67f6f4522911025d5283ca53ac5452",
+        len=110241,
     ),
 )
 # resource(name="openapi-schema", source="openapi.json")
