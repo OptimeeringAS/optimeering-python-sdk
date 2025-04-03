@@ -10,11 +10,11 @@ from __future__ import annotations
 import pprint
 import re  # noqa: F401
 import warnings
-from datetime import datetime
 from typing import Any, ClassVar, Dict, List, Optional, Set
 
 import orjson
 from optimeering.extras import pd, pydantic_to_pandas, require_pandas
+from optimeering.models.expires_at import ExpiresAt
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, model_validator
 
 
@@ -25,11 +25,11 @@ class AccessPostKey(BaseModel):
     :param description: Description for the Access key.
     :type description: str
     :param expires_at:
-    :type expires_at: datetime
+    :type expires_at: ExpiresAt
     """  # noqa: E501
 
     description: StrictStr = Field(description="Description for the Access key.")
-    expires_at: Optional[datetime] = None
+    expires_at: Optional[ExpiresAt] = None
 
     __properties: ClassVar[List[str]] = ["description", "expires_at"]
 
@@ -70,6 +70,9 @@ class AccessPostKey(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of expires_at
+        if self.expires_at:
+            _dict["expires_at"] = self.expires_at.to_dict()
         # set to None if expires_at (nullable) is None
         # and model_fields_set contains the field
         if self.expires_at is None and "expires_at" in self.model_fields_set:
@@ -86,7 +89,12 @@ class AccessPostKey(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({"description": obj.get("description"), "expires_at": obj.get("expires_at")})
+        _obj = cls.model_validate(
+            {
+                "description": obj.get("description"),
+                "expires_at": ExpiresAt.from_dict(obj["expires_at"]) if obj.get("expires_at") is not None else None,
+            }
+        )
         return _obj
 
     @model_validator(mode="before")
