@@ -805,7 +805,6 @@ class PredictionsApi:
     @suggest_series_id_optimization
     def retrieve_versioned(
         self,
-        versioned_series: Annotated[List[VersionedSeries] | PredictionsVersionList, Field(min_length=1)],
         include_simulated: Annotated[
             Optional[StrictBool], Field(description="If false, filters out simulated prediction from response.")
         ] = None,
@@ -821,6 +820,7 @@ class PredictionsApi:
                 description="The last datetime to fetch (exclusive). Defaults to `2999-12-30 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)"
             ),
         ] = None,
+        versioned_series: Annotated[Optional[List[VersionedSeries] | PredictionsVersionList],] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -838,14 +838,14 @@ class PredictionsApi:
         Can be used to retrieve both versioned and simulated data. For an explanation on versioned and simulated data see `Prediction Versioning <https://docs.optimeering.com/getting-started/prediction-versioning/>`_
 
 
-        :param versioned_series: (required)
-        :type versioned_series: List[VersionedSeries] | PredictionsVersionList
         :param include_simulated: If false, filters out simulated prediction from response.
         :type include_simulated: bool
         :param start: The first datetime to fetch (inclusive). Defaults to `1970-01-01 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)
         :type start: Start
         :param end: The last datetime to fetch (exclusive). Defaults to `2999-12-30 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)
         :type end: End
+        :param versioned_series:
+        :type versioned_series: Optional[List[VersionedSeries] | PredictionsVersionList]
         :return: Returns the result object.
         :rtype: PredictionsDataList
 
@@ -860,12 +860,12 @@ class PredictionsApi:
         """  # noqa: E501
 
         _param = self._retrieve_versioned_serialize(
-            versioned_series=versioned_series,
             include_simulated=include_simulated,
             start=start,
             end=end,
             limit=None,
             offset=None,
+            versioned_series=versioned_series,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -922,12 +922,12 @@ class PredictionsApi:
 
     def _retrieve_versioned_serialize(
         self,
-        versioned_series,
         include_simulated,
         start,
         end,
         limit,
         offset,
+        versioned_series,
     ) -> RequestSerialized:
         _collection_formats: Dict[str, str] = {
             "VersionedSeries": "",
