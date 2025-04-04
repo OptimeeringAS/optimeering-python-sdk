@@ -10,7 +10,7 @@ except ImportError:
 else:
     PANDAS_AVAILABLE = True
 
-STRICT_DATETIME_COLUMNS = {"publication_time"}
+STRICT_DATETIME_COLUMNS = {"publication_time", "start", "end", "prediction_for", "event_time"}
 
 
 def require_pandas(fn: Callable):
