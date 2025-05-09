@@ -10,7 +10,7 @@ except ImportError:
 else:
     PANDAS_AVAILABLE = True
 
-STRICT_DATETIME_COLUMNS = {"publication_time"}
+STRICT_DATETIME_COLUMNS = {"publication_time", "start", "end", "prediction_for", "event_time"}
 
 
 def require_pandas(fn: Callable):
@@ -108,5 +108,5 @@ def pydantic_to_pandas(obj, unpack_value_method: Optional[str] = None) -> "pd.Da
             break
     datetime_columns = STRICT_DATETIME_COLUMNS.intersection(df.columns)
     for col in datetime_columns:
-        df[col] = pd.to_datetime(df[col])
+        df[col] = pd.to_datetime(df[col], utc=True)
     return df
