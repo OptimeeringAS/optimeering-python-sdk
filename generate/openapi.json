@@ -94,6 +94,10 @@
                     "expires_at": {
                         "anyOf": [
                             {
+                                "format": "duration",
+                                "type": "string"
+                            },
+                            {
                                 "format": "date-time",
                                 "type": "string"
                             },
@@ -102,6 +106,9 @@
                             }
                         ],
                         "description": "Duration after which key expires. Defaults to one year in the future.",
+                        "examples": [
+                            "P365D"
+                        ],
                         "title": "Expires At"
                     }
                 },
@@ -384,6 +391,7 @@
                                 "type": "null"
                             }
                         ],
+                        "description": "Latest event time created for the version",
                         "examples": [
                             "2024-03-15T06:00:00+00:00"
                         ],
@@ -409,6 +417,18 @@
                     "unit_type": {
                         "$ref": "#/components/schemas/EnumUnitType",
                         "description": "Unit type for the series"
+                    },
+                    "version": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "Latest version for the series.",
+                        "title": "Version"
                     }
                 },
                 "required": [
@@ -796,6 +816,7 @@
                                 "type": "null"
                             }
                         ],
+                        "description": "Latest event time created for the version",
                         "examples": [
                             "2024-03-15T06:00:00+00:00"
                         ],
@@ -1081,7 +1102,7 @@
     "paths": {
         "/api/access/apikey/create": {
             "post": {
-                "description": "Creates a new access key",
+                "description": "Creates a new access key. Click [here](https://docs.optimeering.com/getting-started/auth/) for guide on authentication.",
                 "operationId": "create_api_key",
                 "requestBody": {
                     "content": {
@@ -1118,12 +1139,13 @@
                 "summary": "Post Access",
                 "tags": [
                     "access"
-                ]
+                ],
+                "x-optimeering-sdk-docstring": "Creates a new access key.\nGuide on Authentication: https://docs.optimeering.com/getting-started/auth/"
             }
         },
         "/api/access/apikey/delete": {
             "delete": {
-                "description": "Deletes an api key.",
+                "description": "Deletes an api key by its id.",
                 "operationId": "delete_key",
                 "parameters": [
                     {
@@ -1167,7 +1189,7 @@
         },
         "/api/access/apikey/list_my_keys": {
             "get": {
-                "description": "Lists all the keys owned by the user.",
+                "description": "Lists all the created keys.",
                 "operationId": "list_my_keys",
                 "responses": {
                     "200": {
@@ -1185,7 +1207,7 @@
                         "description": "Successful Response"
                     }
                 },
-                "summary": "Get Access",
+                "summary": "List Keys",
                 "tags": [
                     "access"
                 ],
@@ -1195,7 +1217,7 @@
                 }
             }
         },
-        "/api/predictions/": {
+        "/api/predictions": {
             "get": {
                 "description": "Returns predictions.\n\nIf multiple versions of a prediction exist for a given series, the highest version is returned.\nTo get predictions for a particular version, use the `/api/predictions/versioned` route.",
                 "operationId": "retrieve",
@@ -1503,7 +1525,7 @@
         "/api/predictions/parameters/{param}": {
             "get": {
                 "description": "Allowed values for each parameter used in filters on the **predictions** routes",
-                "operationId": "list_parameters",
+                "operationId": "list_parameters_predictions",
                 "parameters": [
                     {
                         "in": "path",
@@ -1519,7 +1541,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "title": "Response List Parameters",
+                                    "title": "Response List Parameters Predictions",
                                     "type": "object"
                                 }
                             }
@@ -1543,7 +1565,7 @@
                 ]
             }
         },
-        "/api/predictions/series/": {
+        "/api/predictions/series": {
             "get": {
                 "description": "Returns the prediction series\n\nTo list versions of a series, use the `/api/predictions/series_version` route.",
                 "operationId": "list_series",
@@ -1757,7 +1779,7 @@
                 "x-optimeering-sdk-docstring": "\nReturns prediction series.\n\nTo list versions of a series, use the :any:`list_version` method.\n"
             }
         },
-        "/api/predictions/series_version/": {
+        "/api/predictions/series_version": {
             "get": {
                 "description": "Returns prediction series and their versions.",
                 "operationId": "list_version",
@@ -2092,20 +2114,25 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "items": {
-                                    "$ref": "#/components/schemas/VersionedSeries"
-                                },
-                                "minItems": 1,
+                                "anyOf": [
+                                    {
+                                        "items": {
+                                            "$ref": "#/components/schemas/VersionedSeries"
+                                        },
+                                        "minItems": 1,
+                                        "type": "array"
+                                    },
+                                    {
+                                        "type": "null"
+                                    }
+                                ],
                                 "title": "Series Version Restriction",
-                                "type": "array",
                                 "x-optimeering-alternate-typing": {
-                                    "annotation": "Field(min_length=1)",
-                                    "type": "List[VersionedSeries] | PredictionsVersionList"
+                                    "type": "Optional[List[VersionedSeries] | PredictionsVersionList]"
                                 }
                             }
                         }
-                    },
-                    "required": true
+                    }
                 },
                 "responses": {
                     "200": {
