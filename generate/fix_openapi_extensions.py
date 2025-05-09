@@ -170,7 +170,7 @@ def remove_comma_separated_docs(openapi_spec: Dict):
 def remove_hyperlinks_from_docs(openapi_spec: Dict):
     """Remove hyper links for allowed values in documentation"""
     for path, path_definition in openapi_spec["paths"].items():
-        _, _, api_name, _ = path.split("/", 3)
+        _, _, api_name, _ = (path if path.endswith("/") else path + "/").split("/", 3)
         for method, method_definition in path_definition.items():
             if method != "get":
                 continue
