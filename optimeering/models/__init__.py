@@ -11,6 +11,7 @@ from optimeering.models.access_key_created import AccessKeyCreated
 from optimeering.models.access_key_post_response import AccessKeyPostResponse
 from optimeering.models.access_post_key import AccessPostKey
 from optimeering.models.end import End
+from optimeering.models.expires_at import ExpiresAt
 from optimeering.models.http_validation_error import HTTPValidationError
 from optimeering.models.max_event_time import MaxEventTime
 from optimeering.models.predictions_data import PredictionsData
@@ -32,6 +33,7 @@ __all__ = [
     "AccessKeyPostResponse",
     "AccessPostKey",
     "End",
+    "ExpiresAt",
     "HTTPValidationError",
     "MaxEventTime",
     "PredictionsData",

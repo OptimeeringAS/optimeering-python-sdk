@@ -39,7 +39,8 @@ class AccessApi:
     ) -> AccessKeyPostResponse:
         """Post Access
 
-        Creates a new access key
+        Creates a new access key.
+        Guide on Authentication: https://docs.optimeering.com/getting-started/auth/
 
         :param access_post_key: (required)
         :type access_post_key: AccessPostKey
@@ -120,7 +121,7 @@ class AccessApi:
     ) -> bool:
         """Drop Key
 
-        Deletes an api key.
+        Deletes an api key by its id.
 
         :param id: (required)
         :type id: int
@@ -199,9 +200,9 @@ class AccessApi:
             Tuple[Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]],
         ] = None,
     ) -> List[AccessKeyCreated]:
-        """Get Access
+        """List Keys
 
-        Lists all the keys owned by the user.
+        Lists all the created keys.
 
         :return: Returns the result object.
         :rtype: List[AccessKeyCreated]

@@ -12,23 +12,28 @@ def silent_type_cast(fn):
     parameter_conversion = {}
     for param_name, annotation in fn_annotations.parameters.items():
         base_type = typing.get_args(annotation.annotation)
-        if base_type:  # continue only if method has paramters
-            base_type = base_type[0]  # 1st annotation has type info followed by metadata
-
-            # conversion only available for param that support multiple type
-            if isinstance(base_type, typing._UnionGenericAlias):
-                # unions have atleast 2 items
-                # we only care about the first one as thats the one we want to convert to
-                composite_types = typing.get_args(base_type)[0]
-
-                if isinstance(composite_types, typing._GenericAlias):
-                    class_obj = typing.get_args(composite_types)[0]
-                    # filters out python generics
-                    if class_obj.__module__ == "builtins":
-                        continue
-                    class_name = class_obj.__name__
+        if base_type:  # continue only if method has parameters
+            while True:
+                if isinstance(base_type, tuple):
+                    # if iterable, take the first one
+                    base_type = base_type[0]
+                elif typing.get_origin(base_type) in (list, typing.Union):
+                    # if iterable type, take the first one
+                    base_type = typing.get_args(base_type)
+                    if not base_type:
+                        break
+                    base_type = base_type[0]
+                elif base_type is typing.Any:
+                    # no need of polymorphism if any type
+                    break
+                elif base_type.__module__ == "builtins":
+                    # if one of the base python object, polymorphism is not supported
+                    break
+                else:
+                    class_name = base_type.__name__
                     function_name = f"convert_to_{re.sub(r'(?<!^)(?=[A-Z])', '_', class_name).lower()}"
                     parameter_conversion[param_name] = function_name
+                    break
 
     @wraps(fn)
     def decorator(*args, **kwargs):
