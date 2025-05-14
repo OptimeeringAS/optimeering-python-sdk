@@ -44,6 +44,8 @@ class PredictionsSeries(BaseModel):
     :type unit: str
     :param unit_type: Unit type for the series
     :type unit_type: str
+    :param version:
+    :type version: str
     """  # noqa: E501
 
     area: StrictStr = Field(description="Areas to be filtered. E.g. NO1, NO2")
@@ -56,6 +58,7 @@ class PredictionsSeries(BaseModel):
     statistic: StrictStr = Field(description="Type of statistics.")
     unit: StrictStr = Field(description="The unit for the series.")
     unit_type: StrictStr = Field(description="Unit type for the series")
+    version: Optional[StrictStr] = None
     _client: Any = None
 
     __properties: ClassVar[List[str]] = [
@@ -69,6 +72,7 @@ class PredictionsSeries(BaseModel):
         "statistic",
         "unit",
         "unit_type",
+        "version",
     ]
 
     model_config = ConfigDict(
@@ -118,6 +122,11 @@ class PredictionsSeries(BaseModel):
         if self.latest_event_time is None and "latest_event_time" in self.model_fields_set:
             _dict["latest_event_time"] = None
 
+        # set to None if version (nullable) is None
+        # and model_fields_set contains the field
+        if self.version is None and "version" in self.model_fields_set:
+            _dict["version"] = None
+
         return _dict
 
     @classmethod
@@ -141,6 +150,7 @@ class PredictionsSeries(BaseModel):
                 "statistic": obj.get("statistic"),
                 "unit": obj.get("unit"),
                 "unit_type": obj.get("unit_type"),
+                "version": obj.get("version"),
             }
         )
         return _obj

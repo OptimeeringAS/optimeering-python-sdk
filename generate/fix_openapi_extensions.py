@@ -170,7 +170,7 @@ def remove_comma_separated_docs(openapi_spec: Dict):
 def remove_hyperlinks_from_docs(openapi_spec: Dict):
     """Remove hyper links for allowed values in documentation"""
     for path, path_definition in openapi_spec["paths"].items():
-        _, _, api_name, _ = path.split("/", 3)
+        _, _, api_name, _ = (path if path.endswith("/") else path + "/").split("/", 3)
         for method, method_definition in path_definition.items():
             if method != "get":
                 continue
@@ -208,10 +208,30 @@ def move_optimeering_extensions_out_of_schema(content):
                 method_definition["requestBody"] = {**method_definition["requestBody"], **extensions}
 
 
+def fix_operation_id_for_list_parameters(schema: Dict) -> None:
+    """
+    Each parameter API has a unique operation ID for swagger docs to work.
+    But we want the same definition name in python client, so we replace the unique operation id with a common one.
+
+    :param schema: Open api spec.
+    :return:
+    """
+    for path, path_desc in schema["paths"].items():
+        split_path = path.split("/")
+        try:
+            api_name, extension = split_path[2], split_path[3]
+        except IndexError:
+            continue
+        if extension == "parameters":
+            operation_id = path_desc["get"]["operationId"]
+            if operation_id == f"list_parameters_{api_name}":
+                schema["paths"][path]["get"]["operationId"] = "list_parameters"
+
+
 def fix_openapi_extensions(schema_path: str) -> None:
     with open(schema_path, "r") as file:
         content = json.load(file)
-
+    fix_operation_id_for_list_parameters(content)
     replace_sdk_docstring(content)
     remove_comma_separated_docs(content)
     remove_hyperlinks_from_docs(content)
