@@ -206,7 +206,7 @@
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>series_id</strong> (<em>List</em><em>[</em><em>StrictInt</em><em>]</em>) – Series ID to filter. If not specified, will return all series.</p></li>
+<li><p><strong>series_id</strong> (<em>List</em><em>[</em><em>StrictInt</em><em>]</em>) – Series ID to filter. If not specified, will return an exception.</p></li>
 <li><p><strong>start</strong> (<a class="reference internal" href="models.html#optimeering.models.Start" title="optimeering.models.Start"><em>Start</em></a>) – The first datetime to fetch (inclusive). Defaults to <cite>1970-01-01 00:00:00+0000</cite>. Should be specified in ISO 8601 datetime or duration format (eg - <cite>2024-05-15T06:00:00+00:00</cite>, <cite>PT1H</cite>, <cite>-P1W1D</cite>)</p></li>
 <li><p><strong>end</strong> (<a class="reference internal" href="models.html#optimeering.models.End" title="optimeering.models.End"><em>End</em></a>) – The last datetime to fetch (exclusive). Defaults to <cite>2999-12-30 00:00:00+0000</cite>. Should be specified in ISO 8601 datetime or duration format (eg - <cite>2024-05-15T06:00:00+00:00</cite>, <cite>PT1H</cite>, <cite>-P1W1D</cite>)</p></li>
 </ul>
@@ -240,7 +240,7 @@
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>max_event_time</strong> (<a class="reference internal" href="models.html#optimeering.models.MaxEventTime" title="optimeering.models.MaxEventTime"><em>MaxEventTime</em></a>) – If specified, will only return the latest prediction available at the specified time. If not specified, no filters are applied. Should be specified in ISO 8601 datetime or duration format (eg - <cite>2024-05-15T06:00:00+00:00</cite>, <cite>PT1H</cite>, <cite>-P1W1D</cite>)</p></li>
-<li><p><strong>series_id</strong> (<em>List</em><em>[</em><em>StrictInt</em><em>]</em>) – Series ID to filter. If not specified, will return all series.</p></li>
+<li><p><strong>series_id</strong> (<em>List</em><em>[</em><em>StrictInt</em><em>]</em>) – Series ID to filter. If not specified, will return an exception.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>

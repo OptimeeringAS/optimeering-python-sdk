@@ -485,7 +485,7 @@ class PredictionsApi:
         self,
         series_id: Annotated[
             Optional[List[StrictInt]],
-            Field(description="Series ID to filter. If not specified, will return all series."),
+            Field(description="Series ID to filter. If not specified, will return an exception."),
         ] = None,
         start: Annotated[
             Optional[Any],
@@ -515,7 +515,7 @@ class PredictionsApi:
         To get predictions for a particular version, use the :any:`retrieve_versioned` method.
 
 
-        :param series_id: Series ID to filter. If not specified, will return all series.
+        :param series_id: Series ID to filter. If not specified, will return an exception.
         :type series_id: List[StrictInt]
         :param start: The first datetime to fetch (inclusive). Defaults to `1970-01-01 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)
         :type start: Start
@@ -658,7 +658,7 @@ class PredictionsApi:
         ] = None,
         series_id: Annotated[
             Optional[List[StrictInt]],
-            Field(description="Series ID to filter. If not specified, will return all series."),
+            Field(description="Series ID to filter. If not specified, will return an exception."),
         ] = None,
         _request_timeout: Union[
             None,
@@ -678,7 +678,7 @@ class PredictionsApi:
 
         :param max_event_time: If specified, will only return the latest prediction available at the specified time. If not specified, no filters are applied. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)
         :type max_event_time: MaxEventTime
-        :param series_id: Series ID to filter. If not specified, will return all series.
+        :param series_id: Series ID to filter. If not specified, will return an exception.
         :type series_id: List[StrictInt]
         :return: Returns the result object.
         :rtype: PredictionsDataList
