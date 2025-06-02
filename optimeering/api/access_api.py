@@ -261,7 +261,11 @@ class AccessApi:
             next_page = next_pagination.next_page
 
             if attribute_to_extend_selected:
-                if next_pagination.items[0].series_id == paginated_response.items[-1].series_id:
+                try:
+                    first_item = next_pagination.items[0]
+                except IndexError:
+                    break
+                if first_item.series_id == paginated_response.items[-1].series_id:
                     # if series id is same, extract the first item and extend to last item
                     continued_data: List = getattr(next_pagination.items.pop(0), attribute_to_extend_selected)
                     previous_data: List = getattr(paginated_response.items[-1], attribute_to_extend_selected)
