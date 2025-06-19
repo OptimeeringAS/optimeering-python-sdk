@@ -8,7 +8,7 @@ from typing import Dict, List, Optional, Tuple, Union
 
 from optimeering.api_client import OptimeeringClient, RequestSerialized
 from optimeering.logger import log_function_timing, suggest_series_id_optimization
-from optimeering.models.access_key_created import AccessKeyCreated
+from optimeering.models.access_key_list_key_response import AccessKeyListKeyResponse
 from optimeering.models.access_key_post_response import AccessKeyPostResponse
 from optimeering.models.access_post_key import AccessPostKey
 from pydantic import Field, StrictFloat, StrictInt, validate_call
@@ -199,13 +199,13 @@ class AccessApi:
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]],
         ] = None,
-    ) -> List[AccessKeyCreated]:
+    ) -> AccessKeyListKeyResponse:
         """List Keys
 
         Lists all the created keys.
 
         :return: Returns the result object.
-        :rtype: List[AccessKeyCreated]
+        :rtype: AccessKeyListKeyResponse
 
         :Example:
 
@@ -217,10 +217,14 @@ class AccessApi:
 
         """  # noqa: E501
 
-        _param = self._list_my_keys_serialize()
+        _param = self._list_my_keys_serialize(
+            limit=None,
+            offset=None,
+        )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[AccessKeyCreated]",
+            "200": "AccessKeyListKeyResponse",
+            "422": "HTTPValidationError",
         }
 
         response_data = self.api_client.call_api(*_param, _request_timeout=_request_timeout)
@@ -276,6 +280,8 @@ class AccessApi:
 
     def _list_my_keys_serialize(
         self,
+        limit,
+        offset,
     ) -> RequestSerialized:
         _collection_formats: Dict[str, str] = {}
 
@@ -288,6 +294,12 @@ class AccessApi:
 
         # process the path parameters
         # process the query parameters
+        if limit is not None:
+            _query_params.append(("limit", limit))
+
+        if offset is not None:
+            _query_params.append(("offset", offset))
+
         # process the header parameters
         # process the form parameters
         # process the body parameter

@@ -839,7 +839,7 @@ class PredictionsApi:
             Tuple[Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]],
         ] = None,
     ) -> PredictionsDataList:
-        """Retrive Versioned
+        """Retrieve Versioned
 
 
         Returns versioned predictions.
