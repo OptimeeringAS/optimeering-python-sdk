@@ -12,7 +12,7 @@ python_distribution(
     output_path="optimeering-python-sdk",
     provides=python_artifact(
         name="optimeering",
-        version="0.0.3",
+        version="0.0.4",
         description="Optimeering Python Client",
         long_description_content_type="text/markdown",
         author="Optimeering",
