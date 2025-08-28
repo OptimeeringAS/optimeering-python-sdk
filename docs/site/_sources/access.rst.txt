@@ -1,4 +1,4 @@
-AccessAPI
+AccessApi
 ====================
 
 .. autoclass:: optimeering.api.AccessApi
