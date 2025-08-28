@@ -1,6 +1,6 @@
-AccessApi
+AccessAPI
 ====================
 
-.. autoclass:: optimeering.AccessApi
+.. autoclass:: optimeering.api.AccessApi
     :members:
     :member-order: bysource 

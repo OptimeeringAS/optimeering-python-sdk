@@ -48,7 +48,7 @@
 <li class="toctree-l1"><a class="reference internal" href="authentication.html">Authentication</a></li>
 <li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Code Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="access.html">AccessApi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="access.html">AccessAPI</a></li>
 <li class="toctree-l1"><a class="reference internal" href="predictions.html">PredictionsApi</a></li>
 <li class="toctree-l1"><a class="reference internal" href="client.html">Client</a></li>
 <li class="toctree-l1"><a class="reference internal" href="models.html">Client Models</a></li>
@@ -86,7 +86,9 @@
  | <a href="#D"><strong>D</strong></a>
  | <a href="#E"><strong>E</strong></a>
  | <a href="#F"><strong>F</strong></a>
+ | <a href="#G"><strong>G</strong></a>
  | <a href="#H"><strong>H</strong></a>
+ | <a href="#K"><strong>K</strong></a>
  | <a href="#L"><strong>L</strong></a>
  | <a href="#M"><strong>M</strong></a>
  | <a href="#O"><strong>O</strong></a>
@@ -94,21 +96,28 @@
  | <a href="#R"><strong>R</strong></a>
  | <a href="#S"><strong>S</strong></a>
  | <a href="#T"><strong>T</strong></a>
+ | <a href="#U"><strong>U</strong></a>
  | <a href="#V"><strong>V</strong></a>
  
 </div>
 <h2 id="A">A</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="models.html#optimeering.models.AccessKeyCreated">AccessKeyCreated (class in optimeering.models)</a>
+      <li><a href="client.html#optimeering.OptimeeringClient.access_api">access_api (optimeering.OptimeeringClient property)</a>
 </li>
-      <li><a href="models.html#optimeering.models.AccessKeyListKeyResponse">AccessKeyListKeyResponse (class in optimeering.models)</a>
+      <li><a href="access.html#optimeering.api.AccessApi">AccessApi (class in optimeering.api)</a>
+</li>
+      <li><a href="models.html#optimeering.models.AccessKeyCreated">AccessKeyCreated (class in optimeering.models)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="models.html#optimeering.models.AccessKeyListKeyResponse">AccessKeyListKeyResponse (class in optimeering.models)</a>
+</li>
       <li><a href="models.html#optimeering.models.AccessKeyPostResponse">AccessKeyPostResponse (class in optimeering.models)</a>
 </li>
       <li><a href="models.html#optimeering.models.AccessPostKey">AccessPostKey (class in optimeering.models)</a>
+</li>
+      <li><a href="configuration.html#optimeering.Configuration.assert_hostname">assert_hostname (optimeering.Configuration attribute)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -116,12 +125,24 @@
 <h2 id="C">C</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="client.html#optimeering.OptimeeringClient.call_api">call_api() (optimeering.OptimeeringClient method)</a>
+</li>
+      <li><a href="configuration.html#optimeering.Configuration.cert_file">cert_file (optimeering.Configuration attribute)</a>
+</li>
+      <li><a href="configuration.html#optimeering.Configuration">Configuration (class in optimeering)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="configuration.html#optimeering.Configuration.connection_pool_maxsize">connection_pool_maxsize (optimeering.Configuration attribute)</a>
+</li>
       <li><a href="models.html#optimeering.models.PredictionsVersion.convert_to_versioned_series">convert_to_versioned_series() (optimeering.models.PredictionsVersion method)</a>
 
       <ul>
         <li><a href="models.html#optimeering.models.PredictionsVersionList.convert_to_versioned_series">(optimeering.models.PredictionsVersionList method)</a>
 </li>
       </ul></li>
+      <li><a href="access.html#optimeering.api.AccessApi.create_api_key">create_api_key() (optimeering.api.AccessApi method)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -134,6 +155,18 @@
         <li><a href="models.html#optimeering.models.PredictionsSeriesList.datapoints">(optimeering.models.PredictionsSeriesList method)</a>
 </li>
       </ul></li>
+      <li><a href="configuration.html#optimeering.Configuration.date_format">date_format (optimeering.Configuration attribute)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="configuration.html#optimeering.Configuration.datetime_format">datetime_format (optimeering.Configuration attribute)</a>
+</li>
+      <li><a href="configuration.html#optimeering.Configuration.debug">debug (optimeering.Configuration property)</a>
+</li>
+      <li><a href="access.html#optimeering.api.AccessApi.delete_key">delete_key() (optimeering.api.AccessApi method)</a>
+</li>
+      <li><a href="client.html#optimeering.OptimeeringClient.deserialize">deserialize() (optimeering.OptimeeringClient method)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -154,6 +187,8 @@
 <h2 id="F">F</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="client.html#optimeering.OptimeeringClient.files_parameters">files_parameters() (optimeering.OptimeeringClient method)</a>
+</li>
       <li><a href="models.html#optimeering.models.AccessKeyListKeyResponse.filter">filter() (optimeering.models.AccessKeyListKeyResponse method)</a>
 
       <ul>
@@ -247,6 +282,22 @@
   </ul></td>
 </tr></table>
 
+<h2 id="G">G</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="configuration.html#optimeering.Configuration.get_default">get_default() (optimeering.Configuration class method)</a>
+
+      <ul>
+        <li><a href="client.html#optimeering.OptimeeringClient.get_default">(optimeering.OptimeeringClient class method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="configuration.html#optimeering.Configuration.get_default_copy">get_default_copy() (optimeering.Configuration class method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
 <h2 id="H">H</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
@@ -255,15 +306,43 @@
   </ul></td>
 </tr></table>
 
+<h2 id="K">K</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="configuration.html#optimeering.Configuration.key_file">key_file (optimeering.Configuration attribute)</a>
+</li>
+  </ul></td>
+</tr></table>
+
 <h2 id="L">L</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="access.html#optimeering.api.AccessApi.list_my_keys">list_my_keys() (optimeering.api.AccessApi method)</a>
+</li>
+      <li><a href="predictions.html#optimeering.PredictionsApi.list_parameters">list_parameters() (optimeering.PredictionsApi method)</a>
+</li>
+      <li><a href="predictions.html#optimeering.PredictionsApi.list_series">list_series() (optimeering.PredictionsApi method)</a>
+</li>
       <li><a href="models.html#optimeering.models.PredictionsSeries.list_version">list_version() (optimeering.models.PredictionsSeries method)</a>
 
       <ul>
         <li><a href="models.html#optimeering.models.PredictionsSeriesList.list_version">(optimeering.models.PredictionsSeriesList method)</a>
 </li>
+        <li><a href="predictions.html#optimeering.PredictionsApi.list_version">(optimeering.PredictionsApi method)</a>
+</li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="configuration.html#optimeering.Configuration.logger">logger (optimeering.Configuration attribute)</a>
+</li>
+      <li><a href="configuration.html#optimeering.Configuration.logger_file">logger_file (optimeering.Configuration property)</a>
+</li>
+      <li><a href="configuration.html#optimeering.Configuration.logger_file_handler">logger_file_handler (optimeering.Configuration attribute)</a>
+</li>
+      <li><a href="configuration.html#optimeering.Configuration.logger_format">logger_format (optimeering.Configuration property)</a>
+</li>
+      <li><a href="configuration.html#optimeering.Configuration.logger_stream_handler">logger_stream_handler (optimeering.Configuration attribute)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -295,21 +374,35 @@
 </li>
       </ul></li>
   </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="client.html#optimeering.OptimeeringClient">OptimeeringClient (class in optimeering)</a>
+</li>
+  </ul></td>
 </tr></table>
 
 <h2 id="P">P</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="client.html#optimeering.OptimeeringClient.param_serialize">param_serialize() (optimeering.OptimeeringClient method)</a>
+</li>
+      <li><a href="client.html#optimeering.OptimeeringClient.parameters_to_tuples">parameters_to_tuples() (optimeering.OptimeeringClient method)</a>
+</li>
+      <li><a href="client.html#optimeering.OptimeeringClient.parameters_to_url_query">parameters_to_url_query() (optimeering.OptimeeringClient method)</a>
+</li>
+      <li><a href="client.html#optimeering.OptimeeringClient.predictions_api">predictions_api (optimeering.OptimeeringClient property)</a>
+</li>
+      <li><a href="predictions.html#optimeering.PredictionsApi">PredictionsApi (class in optimeering)</a>
+</li>
       <li><a href="models.html#optimeering.models.PredictionsData">PredictionsData (class in optimeering.models)</a>
 </li>
       <li><a href="models.html#optimeering.models.PredictionsDataList">PredictionsDataList (class in optimeering.models)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="models.html#optimeering.models.PredictionsEvent">PredictionsEvent (class in optimeering.models)</a>
 </li>
       <li><a href="models.html#optimeering.models.PredictionsSeries">PredictionsSeries (class in optimeering.models)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="models.html#optimeering.models.PredictionsSeriesList">PredictionsSeriesList (class in optimeering.models)</a>
 </li>
       <li><a href="models.html#optimeering.models.PredictionsValue">PredictionsValue (class in optimeering.models)</a>
@@ -318,30 +411,44 @@
 </li>
       <li><a href="models.html#optimeering.models.PredictionsVersionList">PredictionsVersionList (class in optimeering.models)</a>
 </li>
+      <li><a href="configuration.html#optimeering.Configuration.proxy">proxy (optimeering.Configuration attribute)</a>
+</li>
+      <li><a href="configuration.html#optimeering.Configuration.proxy_headers">proxy_headers (optimeering.Configuration attribute)</a>
+</li>
   </ul></td>
 </tr></table>
 
 <h2 id="R">R</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="client.html#optimeering.OptimeeringClient.response_deserialize">response_deserialize() (optimeering.OptimeeringClient method)</a>
+</li>
+      <li><a href="configuration.html#optimeering.Configuration.retries">retries (optimeering.Configuration attribute)</a>
+</li>
       <li><a href="models.html#optimeering.models.PredictionsSeries.retrieve">retrieve() (optimeering.models.PredictionsSeries method)</a>
 
       <ul>
         <li><a href="models.html#optimeering.models.PredictionsSeriesList.retrieve">(optimeering.models.PredictionsSeriesList method)</a>
 </li>
+        <li><a href="predictions.html#optimeering.PredictionsApi.retrieve">(optimeering.PredictionsApi method)</a>
+</li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="models.html#optimeering.models.PredictionsSeries.retrieve_latest">retrieve_latest() (optimeering.models.PredictionsSeries method)</a>
 
       <ul>
         <li><a href="models.html#optimeering.models.PredictionsSeriesList.retrieve_latest">(optimeering.models.PredictionsSeriesList method)</a>
 </li>
+        <li><a href="predictions.html#optimeering.PredictionsApi.retrieve_latest">(optimeering.PredictionsApi method)</a>
+</li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="models.html#optimeering.models.PredictionsVersion.retrieve_versioned">retrieve_versioned() (optimeering.models.PredictionsVersion method)</a>
 
       <ul>
         <li><a href="models.html#optimeering.models.PredictionsVersionList.retrieve_versioned">(optimeering.models.PredictionsVersionList method)</a>
+</li>
+        <li><a href="predictions.html#optimeering.PredictionsApi.retrieve_versioned">(optimeering.PredictionsApi method)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -350,7 +457,25 @@
 <h2 id="S">S</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="client.html#optimeering.OptimeeringClient.sanitize_for_serialization">sanitize_for_serialization() (optimeering.OptimeeringClient method)</a>
+</li>
+      <li><a href="client.html#optimeering.OptimeeringClient.select_header_accept">select_header_accept() (optimeering.OptimeeringClient method)</a>
+</li>
+      <li><a href="client.html#optimeering.OptimeeringClient.select_header_content_type">select_header_content_type() (optimeering.OptimeeringClient method)</a>
+</li>
       <li><a href="models.html#optimeering.models.PredictionsSeriesList.series_ids">series_ids (optimeering.models.PredictionsSeriesList property)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="configuration.html#optimeering.Configuration.set_default">set_default() (optimeering.Configuration class method)</a>
+
+      <ul>
+        <li><a href="client.html#optimeering.OptimeeringClient.set_default">(optimeering.OptimeeringClient class method)</a>
+</li>
+      </ul></li>
+      <li><a href="configuration.html#optimeering.Configuration.socket_options">socket_options (optimeering.Configuration attribute)</a>
+</li>
+      <li><a href="configuration.html#optimeering.Configuration.ssl_ca_cert">ssl_ca_cert (optimeering.Configuration attribute)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -358,6 +483,8 @@
 <h2 id="T">T</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="configuration.html#optimeering.Configuration.tls_server_name">tls_server_name (optimeering.Configuration attribute)</a>
+</li>
       <li><a href="models.html#optimeering.models.AccessKeyCreated.to_dict">to_dict() (optimeering.models.AccessKeyCreated method)</a>
 
       <ul>
@@ -521,6 +648,18 @@
   </ul></td>
 </tr></table>
 
+<h2 id="U">U</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="client.html#optimeering.OptimeeringClient.update_params_for_auth">update_params_for_auth() (optimeering.OptimeeringClient method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="client.html#optimeering.OptimeeringClient.user_agent">user_agent (optimeering.OptimeeringClient property)</a>
+</li>
+  </ul></td>
+</tr></table>
+
 <h2 id="V">V</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
@@ -528,6 +667,10 @@
 </li>
       <li><a href="models.html#optimeering.models.ValidationErrorLocInner">ValidationErrorLocInner (class in optimeering.models)</a>
 </li>
+      <li><a href="configuration.html#optimeering.Configuration.verify_ssl">verify_ssl (optimeering.Configuration attribute)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="models.html#optimeering.models.PredictionsData.version_validate_regular_expression">version_validate_regular_expression() (optimeering.models.PredictionsData class method)</a>
 
       <ul>
@@ -536,8 +679,6 @@
         <li><a href="models.html#optimeering.models.VersionedSeries.version_validate_regular_expression">(optimeering.models.VersionedSeries class method)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="models.html#optimeering.models.VersionedSeries">VersionedSeries (class in optimeering.models)</a>
 </li>
   </ul></td>
