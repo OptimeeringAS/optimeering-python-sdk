@@ -4,6 +4,8 @@
     Optimeering
 
 """  # noqa: E501
+from http.client import IncompleteRead
+from time import sleep
 from typing import Any, Dict, List, Optional, Tuple, Union
 
 from optimeering.api_client import OptimeeringClient, RequestSerialized
@@ -15,6 +17,7 @@ from optimeering.models.versioned_series import VersionedSeries
 from optimeering.silent_type_cast import silent_type_cast
 from pydantic import Field, StrictBool, StrictFloat, StrictInt, StrictStr, validate_call
 from typing_extensions import Annotated
+from urllib3.exceptions import ProtocolError
 
 
 class PredictionsApi:
@@ -38,7 +41,7 @@ class PredictionsApi:
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]],
         ] = None,
-    ) -> object:
+    ) -> Dict[str, object]:
         """Parameter Route
 
         Allowed values for each parameter used in filters on the **predictions** routes
@@ -46,7 +49,7 @@ class PredictionsApi:
         :param param: (required)
         :type param: str
         :return: Returns the result object.
-        :rtype: object
+        :rtype: Dict[str, object]
 
         :Example:
 
@@ -63,12 +66,20 @@ class PredictionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "object",
+            "200": "Dict[str, object]",
             "422": "HTTPValidationError",
         }
 
-        response_data = self.api_client.call_api(*_param, _request_timeout=_request_timeout)
-        response_data.read()
+        for _read_retry in range(4):
+            try:
+                response_data = self.api_client.call_api(*_param, _request_timeout=_request_timeout)
+                response_data.read()
+            except (ProtocolError, IncompleteRead) as err:
+                if _read_retry >= 3:
+                    raise err
+                sleep(_read_retry)
+            else:
+                break
         response = self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
@@ -194,8 +205,16 @@ class PredictionsApi:
             "422": "HTTPValidationError",
         }
 
-        response_data = self.api_client.call_api(*_param, _request_timeout=_request_timeout)
-        response_data.read()
+        for _read_retry in range(4):
+            try:
+                response_data = self.api_client.call_api(*_param, _request_timeout=_request_timeout)
+                response_data.read()
+            except (ProtocolError, IncompleteRead) as err:
+                if _read_retry >= 3:
+                    raise err
+                sleep(_read_retry)
+            else:
+                break
         paginated_response = self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
@@ -406,8 +425,16 @@ class PredictionsApi:
             "422": "HTTPValidationError",
         }
 
-        response_data = self.api_client.call_api(*_param, _request_timeout=_request_timeout)
-        response_data.read()
+        for _read_retry in range(4):
+            try:
+                response_data = self.api_client.call_api(*_param, _request_timeout=_request_timeout)
+                response_data.read()
+            except (ProtocolError, IncompleteRead) as err:
+                if _read_retry >= 3:
+                    raise err
+                sleep(_read_retry)
+            else:
+                break
         response = self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
@@ -494,13 +521,13 @@ class PredictionsApi:
         start: Annotated[
             Optional[Any],
             Field(
-                description="The first datetime to fetch (inclusive). Defaults to `1970-01-01 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)"
+                description="The first datetime to fetch (inclusive).  This filter applies to `event_time`. Defaults to `1970-01-01 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)"
             ),
         ] = None,
         end: Annotated[
             Optional[Any],
             Field(
-                description="The last datetime to fetch (exclusive). Defaults to `2999-12-30 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)"
+                description="The last datetime to fetch (exclusive).  This filter applies to `event_time`. Defaults to `2999-12-30 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)"
             ),
         ] = None,
         _request_timeout: Union[
@@ -521,10 +548,10 @@ class PredictionsApi:
 
         :param series_id: Series ID to filter. If not specified, will return an exception.
         :type series_id: List[StrictInt]
-        :param start: The first datetime to fetch (inclusive). Defaults to `1970-01-01 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)
-        :type start: Start
-        :param end: The last datetime to fetch (exclusive). Defaults to `2999-12-30 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)
-        :type end: End
+        :param start: The first datetime to fetch (inclusive).  This filter applies to `event_time`. Defaults to `1970-01-01 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)
+        :type start: EventTimeStart
+        :param end: The last datetime to fetch (exclusive).  This filter applies to `event_time`. Defaults to `2999-12-30 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)
+        :type end: EventTimeEnd
         :return: Returns the result object.
         :rtype: PredictionsDataList
 
@@ -551,8 +578,16 @@ class PredictionsApi:
             "422": "HTTPValidationError",
         }
 
-        response_data = self.api_client.call_api(*_param, _request_timeout=_request_timeout)
-        response_data.read()
+        for _read_retry in range(4):
+            try:
+                response_data = self.api_client.call_api(*_param, _request_timeout=_request_timeout)
+                response_data.read()
+            except (ProtocolError, IncompleteRead) as err:
+                if _read_retry >= 3:
+                    raise err
+                sleep(_read_retry)
+            else:
+                break
         paginated_response = self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
@@ -713,8 +748,16 @@ class PredictionsApi:
             "422": "HTTPValidationError",
         }
 
-        response_data = self.api_client.call_api(*_param, _request_timeout=_request_timeout)
-        response_data.read()
+        for _read_retry in range(4):
+            try:
+                response_data = self.api_client.call_api(*_param, _request_timeout=_request_timeout)
+                response_data.read()
+            except (ProtocolError, IncompleteRead) as err:
+                if _read_retry >= 3:
+                    raise err
+                sleep(_read_retry)
+            else:
+                break
         paginated_response = self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
@@ -823,13 +866,13 @@ class PredictionsApi:
         start: Annotated[
             Optional[Any],
             Field(
-                description="The first datetime to fetch (inclusive). Defaults to `1970-01-01 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)"
+                description="The first datetime to fetch (inclusive).  This filter applies to `event_time`. Defaults to `1970-01-01 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)"
             ),
         ] = None,
         end: Annotated[
             Optional[Any],
             Field(
-                description="The last datetime to fetch (exclusive). Defaults to `2999-12-30 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)"
+                description="The last datetime to fetch (exclusive).  This filter applies to `event_time`. Defaults to `2999-12-30 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)"
             ),
         ] = None,
         versioned_series: Optional[List[VersionedSeries] | PredictionsVersionList] = None,
@@ -852,10 +895,10 @@ class PredictionsApi:
 
         :param include_simulated: If false, filters out simulated prediction from response.
         :type include_simulated: bool
-        :param start: The first datetime to fetch (inclusive). Defaults to `1970-01-01 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)
-        :type start: Start
-        :param end: The last datetime to fetch (exclusive). Defaults to `2999-12-30 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)
-        :type end: End
+        :param start: The first datetime to fetch (inclusive).  This filter applies to `event_time`. Defaults to `1970-01-01 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)
+        :type start: EventTimeStart
+        :param end: The last datetime to fetch (exclusive).  This filter applies to `event_time`. Defaults to `2999-12-30 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)
+        :type end: EventTimeEnd
         :param versioned_series:
         :type versioned_series: Optional[List[VersionedSeries] | PredictionsVersionList]
         :return: Returns the result object.
@@ -885,8 +928,16 @@ class PredictionsApi:
             "422": "HTTPValidationError",
         }
 
-        response_data = self.api_client.call_api(*_param, _request_timeout=_request_timeout)
-        response_data.read()
+        for _read_retry in range(4):
+            try:
+                response_data = self.api_client.call_api(*_param, _request_timeout=_request_timeout)
+                response_data.read()
+            except (ProtocolError, IncompleteRead) as err:
+                if _read_retry >= 3:
+                    raise err
+                sleep(_read_retry)
+            else:
+                break
         paginated_response = self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,

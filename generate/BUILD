@@ -9,8 +9,8 @@ resource(
     name="openapi-schema",
     source=http_source(
         url="https://app.optimeering.com/api/docs/openapi.json",
-        sha256="be9111f222b415d21716f5d3ed73c155bd760a913acab0e63ef4754719ccd66f",
-        len=114660,
+        sha256="f9e2c72305a83ced68628f4a8385d83c224559562cec794c81e7177927e926fb",
+        len=115746,
     ),
 )
 # resource(name="openapi-schema", source="openapi.json")
@@ -44,7 +44,7 @@ jvm_artifact(
     name="openapi-generator",
     group="org.openapitools",
     artifact="openapi-generator-cli",
-    version="7.10.0",
+    version="7.13.0",
 )
 
 adhoc_tool(

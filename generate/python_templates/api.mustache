@@ -2,11 +2,12 @@
 
 {{>partial_header}}
 import warnings
-from time import perf_counter
+from time import perf_counter, sleep
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
-
+from urllib3.exceptions import ProtocolError
+from http.client import IncompleteRead
 {{#imports}}
 {{import}}
 {{/imports}}
@@ -38,11 +39,19 @@ class {{classname}}:
     @suggest_series_id_optimization
     {{#asyncio}}async {{/asyncio}}def {{operationId}}{{>partial_api_args}} -> {{{returnType}}}{{^returnType}}None{{/returnType}}:
 {{>partial_api}}
-        response_data = {{#asyncio}}await {{/asyncio}}self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        {{#asyncio}}await {{/asyncio}}response_data.read()
+        for _read_retry in range(4):
+            try:
+                response_data = {{#asyncio}}await {{/asyncio}}self.api_client.call_api(
+                    *_param,
+                    _request_timeout=_request_timeout
+                )
+                {{#asyncio}}await {{/asyncio}}response_data.read()
+            except (ProtocolError,IncompleteRead) as err:
+                if _read_retry>=3:
+                    raise err
+                sleep(_read_retry)
+            else:
+                break
         response= self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
@@ -60,11 +69,20 @@ class {{classname}}:
     @suggest_series_id_optimization
     {{#asyncio}}async {{/asyncio}}def {{operationId}}{{>partial_api_args_pagination_removed}} -> {{{returnType}}}{{^returnType}}None{{/returnType}}:
 {{>partial_api_pagination_removed}}
-        response_data = {{#asyncio}}await {{/asyncio}}self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        {{#asyncio}}await {{/asyncio}}response_data.read()
+
+        for _read_retry in range(4):
+            try:
+                response_data = {{#asyncio}}await {{/asyncio}}self.api_client.call_api(
+                    *_param,
+                    _request_timeout=_request_timeout
+                )
+                {{#asyncio}}await {{/asyncio}}response_data.read()
+            except (ProtocolError,IncompleteRead)  as err:
+                if _read_retry>=3:
+                    raise err
+                sleep(_read_retry)
+            else:
+                break
         paginated_response = self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
