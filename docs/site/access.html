@@ -52,10 +52,10 @@
 <li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Code Examples</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">AccessApi</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#optimeering.api.AccessApi"><code class="docutils literal notranslate"><span class="pre">AccessApi</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#optimeering.api.AccessApi.create_api_key"><code class="docutils literal notranslate"><span class="pre">AccessApi.create_api_key()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#optimeering.api.AccessApi.delete_key"><code class="docutils literal notranslate"><span class="pre">AccessApi.delete_key()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#optimeering.api.AccessApi.list_my_keys"><code class="docutils literal notranslate"><span class="pre">AccessApi.list_my_keys()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#optimeering.AccessApi"><code class="docutils literal notranslate"><span class="pre">AccessApi</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#optimeering.AccessApi.create_api_key"><code class="docutils literal notranslate"><span class="pre">AccessApi.create_api_key()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#optimeering.AccessApi.delete_key"><code class="docutils literal notranslate"><span class="pre">AccessApi.delete_key()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#optimeering.AccessApi.list_my_keys"><code class="docutils literal notranslate"><span class="pre">AccessApi.list_my_keys()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -92,12 +92,12 @@
   <section id="accessapi">
 <h1>AccessApi<a class="headerlink" href="#accessapi" title="Link to this heading"></a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="optimeering.api.AccessApi">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">optimeering.api.</span></span><span class="sig-name descname"><span class="pre">AccessApi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api_client</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#optimeering.api.AccessApi" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="optimeering.AccessApi">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">optimeering.</span></span><span class="sig-name descname"><span class="pre">AccessApi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api_client</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#optimeering.AccessApi" title="Link to this definition"></a></dt>
 <dd><p>Collection of methods to interact with AccessApi</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="optimeering.api.AccessApi.create_api_key">
-<span class="sig-name descname"><span class="pre">create_api_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">access_post_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_request_timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#optimeering.api.AccessApi.create_api_key" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="optimeering.AccessApi.create_api_key">
+<span class="sig-name descname"><span class="pre">create_api_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">access_post_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_request_timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#optimeering.AccessApi.create_api_key" title="Link to this definition"></a></dt>
 <dd><p>Post Access</p>
 <p>Creates a new access key.
 Guide on Authentication: <a class="reference external" href="https://docs.optimeering.com/getting-started/auth/">https://docs.optimeering.com/getting-started/auth/</a></p>
@@ -124,8 +124,8 @@ Guide on Authentication: <a class="reference external" href="https://docs.optime
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="optimeering.api.AccessApi.delete_key">
-<span class="sig-name descname"><span class="pre">delete_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_request_timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#optimeering.api.AccessApi.delete_key" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="optimeering.AccessApi.delete_key">
+<span class="sig-name descname"><span class="pre">delete_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_request_timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#optimeering.AccessApi.delete_key" title="Link to this definition"></a></dt>
 <dd><p>Drop Key</p>
 <p>Deletes an api key by its id.</p>
 <dl class="field-list">
@@ -151,8 +151,8 @@ Guide on Authentication: <a class="reference external" href="https://docs.optime
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="optimeering.api.AccessApi.list_my_keys">
-<span class="sig-name descname"><span class="pre">list_my_keys</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_request_timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#optimeering.api.AccessApi.list_my_keys" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="optimeering.AccessApi.list_my_keys">
+<span class="sig-name descname"><span class="pre">list_my_keys</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_request_timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#optimeering.AccessApi.list_my_keys" title="Link to this definition"></a></dt>
 <dd><p>List Keys</p>
 <p>Lists all the created keys.</p>
 <dl class="field-list">
