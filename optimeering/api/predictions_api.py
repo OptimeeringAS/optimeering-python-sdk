@@ -38,7 +38,7 @@ class PredictionsApi:
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]],
         ] = None,
-    ) -> object:
+    ) -> Dict[str, object]:
         """Parameter Route
 
         Allowed values for each parameter used in filters on the **predictions** routes
@@ -46,7 +46,7 @@ class PredictionsApi:
         :param param: (required)
         :type param: str
         :return: Returns the result object.
-        :rtype: object
+        :rtype: Dict[str, object]
 
         :Example:
 
@@ -63,7 +63,7 @@ class PredictionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "object",
+            "200": "Dict[str, object]",
             "422": "HTTPValidationError",
         }
 
@@ -494,13 +494,13 @@ class PredictionsApi:
         start: Annotated[
             Optional[Any],
             Field(
-                description="The first datetime to fetch (inclusive). Defaults to `1970-01-01 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)"
+                description="The first datetime to fetch (inclusive).  This filter applies to `event_time`. Defaults to `1970-01-01 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)"
             ),
         ] = None,
         end: Annotated[
             Optional[Any],
             Field(
-                description="The last datetime to fetch (exclusive). Defaults to `2999-12-30 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)"
+                description="The last datetime to fetch (exclusive).  This filter applies to `event_time`. Defaults to `2999-12-30 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)"
             ),
         ] = None,
         _request_timeout: Union[
@@ -521,10 +521,10 @@ class PredictionsApi:
 
         :param series_id: Series ID to filter. If not specified, will return an exception.
         :type series_id: List[StrictInt]
-        :param start: The first datetime to fetch (inclusive). Defaults to `1970-01-01 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)
-        :type start: Start
-        :param end: The last datetime to fetch (exclusive). Defaults to `2999-12-30 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)
-        :type end: End
+        :param start: The first datetime to fetch (inclusive).  This filter applies to `event_time`. Defaults to `1970-01-01 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)
+        :type start: EventTimeStart
+        :param end: The last datetime to fetch (exclusive).  This filter applies to `event_time`. Defaults to `2999-12-30 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)
+        :type end: EventTimeEnd
         :return: Returns the result object.
         :rtype: PredictionsDataList
 
@@ -661,7 +661,7 @@ class PredictionsApi:
         max_event_time: Annotated[
             Optional[Any],
             Field(
-                description="If specified, will only return the latest prediction available at the specified time. If not specified, no filters are applied. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)"
+                description="If specified, will only return the latest prediction available at the specified time. If not specified, no filtering on event_time is done. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)"
             ),
         ] = None,
         series_id: Annotated[
@@ -684,7 +684,7 @@ class PredictionsApi:
         To get predictions for a particular version, use the :any:`retrieve_versioned`  method.
 
 
-        :param max_event_time: If specified, will only return the latest prediction available at the specified time. If not specified, no filters are applied. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)
+        :param max_event_time: If specified, will only return the latest prediction available at the specified time. If not specified, no filtering on event_time is done. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)
         :type max_event_time: MaxEventTime
         :param series_id: Series ID to filter. If not specified, will return an exception.
         :type series_id: List[StrictInt]
@@ -823,13 +823,13 @@ class PredictionsApi:
         start: Annotated[
             Optional[Any],
             Field(
-                description="The first datetime to fetch (inclusive). Defaults to `1970-01-01 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)"
+                description="The first datetime to fetch (inclusive).  This filter applies to `event_time`. Defaults to `1970-01-01 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)"
             ),
         ] = None,
         end: Annotated[
             Optional[Any],
             Field(
-                description="The last datetime to fetch (exclusive). Defaults to `2999-12-30 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)"
+                description="The last datetime to fetch (exclusive).  This filter applies to `event_time`. Defaults to `2999-12-30 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)"
             ),
         ] = None,
         versioned_series: Optional[List[VersionedSeries] | PredictionsVersionList] = None,
@@ -852,10 +852,10 @@ class PredictionsApi:
 
         :param include_simulated: If false, filters out simulated prediction from response.
         :type include_simulated: bool
-        :param start: The first datetime to fetch (inclusive). Defaults to `1970-01-01 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)
-        :type start: Start
-        :param end: The last datetime to fetch (exclusive). Defaults to `2999-12-30 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)
-        :type end: End
+        :param start: The first datetime to fetch (inclusive).  This filter applies to `event_time`. Defaults to `1970-01-01 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)
+        :type start: EventTimeStart
+        :param end: The last datetime to fetch (exclusive).  This filter applies to `event_time`. Defaults to `2999-12-30 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)
+        :type end: EventTimeEnd
         :param versioned_series:
         :type versioned_series: Optional[List[VersionedSeries] | PredictionsVersionList]
         :return: Returns the result object.

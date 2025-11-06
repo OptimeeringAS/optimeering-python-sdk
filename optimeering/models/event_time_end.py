@@ -15,12 +15,12 @@ from typing import Any, Dict, Optional, Set, Union
 import orjson
 from pydantic import BaseModel, ValidationError, field_validator
 
-START_ANY_OF_SCHEMAS = ["datetime", "str"]
+EVENTTIMEEND_ANY_OF_SCHEMAS = ["datetime", "str"]
 
 
-class Start(BaseModel):
+class EventTimeEnd(BaseModel):
     """
-    The first datetime to fetch (inclusive). Defaults to `1970-01-01 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)
+    The last datetime to fetch (exclusive).  This filter applies to `event_time`. Defaults to `2999-12-30 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)
     """
 
     # data type: str
@@ -51,7 +51,7 @@ class Start(BaseModel):
         if v is None:
             return v
 
-        instance = Start.model_construct()  # noqa: F841
+        instance = EventTimeEnd.model_construct()  # noqa: F841
         error_messages = []
         # validate data type: str
         try:
@@ -68,18 +68,18 @@ class Start(BaseModel):
         if error_messages:
             # no match
             raise ValueError(
-                "No match found when setting the actual_instance in Start with anyOf schemas: datetime, str. Details: "
+                "No match found when setting the actual_instance in EventTimeEnd with anyOf schemas: datetime, str. Details: "
                 + ", ".join(error_messages)
             )
         else:
             return v
 
     @classmethod
-    def from_dict(cls, obj: Dict[str, Any]) -> Start:
+    def from_dict(cls, obj: Dict[str, Any]) -> EventTimeEnd:
         return cls.from_json(orjson.dumps(obj).decode())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Start:
+    def from_json(cls, json_str: str) -> EventTimeEnd:
         """Returns the object represented by the json string"""
         instance = cls.model_construct()
         if json_str is None:
@@ -108,7 +108,7 @@ class Start(BaseModel):
         if error_messages:
             # no match
             raise ValueError(
-                "No match found when deserializing the JSON string into Start with anyOf schemas: datetime, str. Details: "
+                "No match found when deserializing the JSON string into EventTimeEnd with anyOf schemas: datetime, str. Details: "
                 + ", ".join(error_messages)
             )
         else:
