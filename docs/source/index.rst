@@ -8,7 +8,7 @@ To install this package:
 
 .. code-block:: bash
 
-   pip install optimeering-python-sdk
+   pip install optimeering
 
 .. contents::
    :local:
