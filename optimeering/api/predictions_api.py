@@ -696,7 +696,7 @@ class PredictionsApi:
         max_event_time: Annotated[
             Optional[Any],
             Field(
-                description="If specified, will only return the latest prediction available at the specified time. If not specified, no filters are applied. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)"
+                description="If specified, will only return the latest prediction available at the specified time. If not specified, no filtering on event_time is done. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)"
             ),
         ] = None,
         series_id: Annotated[
@@ -719,7 +719,7 @@ class PredictionsApi:
         To get predictions for a particular version, use the :any:`retrieve_versioned`  method.
 
 
-        :param max_event_time: If specified, will only return the latest prediction available at the specified time. If not specified, no filters are applied. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)
+        :param max_event_time: If specified, will only return the latest prediction available at the specified time. If not specified, no filtering on event_time is done. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)
         :type max_event_time: MaxEventTime
         :param series_id: Series ID to filter. If not specified, will return an exception.
         :type series_id: List[StrictInt]

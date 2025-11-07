@@ -665,7 +665,7 @@ are ignored.</p></li>
 <dl class="py class">
 <dt class="sig sig-object py" id="optimeering.models.MaxEventTime">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">optimeering.models.</span></span><span class="sig-name descname"><span class="pre">MaxEventTime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">anyof_schema_1_validator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">anyof_schema_2_validator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actual_instance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">any_of_schemas</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{'datetime',</span> <span class="pre">'str'}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#optimeering.models.MaxEventTime" title="Link to this definition"></a></dt>
-<dd><p>If specified, will only return the latest prediction available at the specified time. If not specified, no filters are applied. Should be specified in ISO 8601 datetime or duration format (eg - <cite>2024-05-15T06:00:00+00:00</cite>, <cite>PT1H</cite>, <cite>-P1W1D</cite>)</p>
+<dd><p>If specified, will only return the latest prediction available at the specified time. If not specified, no filtering on event_time is done. Should be specified in ISO 8601 datetime or duration format (eg - <cite>2024-05-15T06:00:00+00:00</cite>, <cite>PT1H</cite>, <cite>-P1W1D</cite>)</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="optimeering.models.MaxEventTime.from_json">
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#optimeering.models.MaxEventTime.from_json" title="Link to this definition"></a></dt>
@@ -1028,7 +1028,7 @@ are ignored.</p></li>
 <blockquote>
 <div><dl class="field-list simple">
 <dt class="field-odd">param max_event_time<span class="colon">:</span></dt>
-<dd class="field-odd"><p>If specified, will only return the latest prediction available at the specified time. If not specified, no filters are applied. Should be specified in ISO 8601 datetime or duration format (eg - <cite>2024-05-15T06:00:00+00:00</cite>, <cite>PT1H</cite>, <cite>-P1W1D</cite>)</p>
+<dd class="field-odd"><p>If specified, will only return the latest prediction available at the specified time. If not specified, no filtering on event_time is done. Should be specified in ISO 8601 datetime or duration format (eg - <cite>2024-05-15T06:00:00+00:00</cite>, <cite>PT1H</cite>, <cite>-P1W1D</cite>)</p>
 </dd>
 </dl>
 </div></blockquote>
@@ -1167,7 +1167,7 @@ are ignored.</p></li>
 <blockquote>
 <div><dl class="field-list simple">
 <dt class="field-odd">param max_event_time<span class="colon">:</span></dt>
-<dd class="field-odd"><p>If specified, will only return the latest prediction available at the specified time. If not specified, no filters are applied. Should be specified in ISO 8601 datetime or duration format (eg - <cite>2024-05-15T06:00:00+00:00</cite>, <cite>PT1H</cite>, <cite>-P1W1D</cite>)</p>
+<dd class="field-odd"><p>If specified, will only return the latest prediction available at the specified time. If not specified, no filtering on event_time is done. Should be specified in ISO 8601 datetime or duration format (eg - <cite>2024-05-15T06:00:00+00:00</cite>, <cite>PT1H</cite>, <cite>-P1W1D</cite>)</p>
 </dd>
 </dl>
 </div></blockquote>
