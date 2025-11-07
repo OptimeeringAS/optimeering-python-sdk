@@ -1,27 +1,27 @@
 poetry_requirements(
-    name = "root",
+    name="root",
 )
 
 python_distribution(
-    name = "optimeering",
-    dependencies = [
+    name="optimeering",
+    dependencies=[
         "//optimeering:optimeering",
         ":root#orjson",
     ],
-    long_description_path = "README.md",
-    output_path = "optimeering-python-sdk",
-    provides = python_artifact(
-        name = "optimeering",
-        author = "Optimeering",
-        classifiers = [
+    long_description_path="README.md",
+    output_path="optimeering-python-sdk",
+    provides=python_artifact(
+        name="optimeering",
+        author="Optimeering",
+        classifiers=[
             "Programming Language :: Python :: 3.10",
             "Programming Language :: Python :: 3.11",
         ],
-        description = "Optimeering Python Client",
-        long_description_content_type = "text/markdown",
-        version = "0.0.5",
+        description="Optimeering Python Client",
+        long_description_content_type="text/markdown",
+        version="0.0.5",
     ),
-    wheel_config_settings = {
+    wheel_config_settings={
         "--build-option": [
             "--python-tag",
             "py310.py311",
@@ -30,6 +30,6 @@ python_distribution(
 )
 
 file(
-    name = "pyproject",
-    source = "pyproject.toml",
+    name="pyproject",
+    source="pyproject.toml",
 )
