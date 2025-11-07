@@ -100,9 +100,11 @@ class PredictionsEvent(BaseModel):
                 "created_at": obj.get("created_at"),
                 "event_time": obj.get("event_time"),
                 "is_simulated": obj.get("is_simulated"),
-                "predictions": [PredictionsValue.from_dict(_item) for _item in obj["predictions"]]
-                if obj.get("predictions") is not None
-                else None,
+                "predictions": (
+                    [PredictionsValue.from_dict(_item) for _item in obj["predictions"]]
+                    if obj.get("predictions") is not None
+                    else None
+                ),
             }
         )
         return _obj

@@ -89,6 +89,7 @@ class AccessApi:
         self,
         access_post_key,
     ) -> RequestSerialized:
+
         _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
@@ -178,6 +179,7 @@ class AccessApi:
         self,
         id,
     ) -> RequestSerialized:
+
         _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
@@ -190,6 +192,7 @@ class AccessApi:
         # process the path parameters
         # process the query parameters
         if id is not None:
+
             _query_params.append(("id", id))
 
         # process the header parameters
@@ -310,6 +313,7 @@ class AccessApi:
         limit,
         offset,
     ) -> RequestSerialized:
+
         _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
@@ -322,9 +326,11 @@ class AccessApi:
         # process the path parameters
         # process the query parameters
         if limit is not None:
+
             _query_params.append(("limit", limit))
 
         if offset is not None:
+
             _query_params.append(("offset", offset))
 
         # process the header parameters

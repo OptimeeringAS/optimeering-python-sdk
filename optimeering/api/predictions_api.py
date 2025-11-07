@@ -90,6 +90,7 @@ class PredictionsApi:
         self,
         param,
     ) -> RequestSerialized:
+
         _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
@@ -275,6 +276,7 @@ class PredictionsApi:
         limit,
         offset,
     ) -> RequestSerialized:
+
         _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
@@ -287,33 +289,41 @@ class PredictionsApi:
         # process the path parameters
         # process the query parameters
         if id is not None:
+
             id = ",".join(str(i) for i in id)
             _query_params.append(("id", id))
 
         if product is not None:
+
             product = ",".join(str(i) for i in product)
             _query_params.append(("product", product))
 
         if unit_type is not None:
+
             unit_type = ",".join(str(i) for i in unit_type)
             _query_params.append(("unit_type", unit_type))
 
         if statistic is not None:
+
             statistic = ",".join(str(i) for i in statistic)
             _query_params.append(("statistic", statistic))
 
         if area is not None:
+
             area = ",".join(str(i) for i in area)
             _query_params.append(("area", area))
 
         if resolution is not None:
+
             resolution = ",".join(str(i) for i in resolution)
             _query_params.append(("resolution", resolution))
 
         if limit is not None:
+
             _query_params.append(("limit", limit))
 
         if offset is not None:
+
             _query_params.append(("offset", offset))
 
         # process the header parameters
@@ -452,6 +462,7 @@ class PredictionsApi:
         limit,
         offset,
     ) -> RequestSerialized:
+
         _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
@@ -464,33 +475,41 @@ class PredictionsApi:
         # process the path parameters
         # process the query parameters
         if id is not None:
+
             id = ",".join(str(i) for i in id)
             _query_params.append(("id", id))
 
         if product is not None:
+
             product = ",".join(str(i) for i in product)
             _query_params.append(("product", product))
 
         if unit_type is not None:
+
             unit_type = ",".join(str(i) for i in unit_type)
             _query_params.append(("unit_type", unit_type))
 
         if statistic is not None:
+
             statistic = ",".join(str(i) for i in statistic)
             _query_params.append(("statistic", statistic))
 
         if area is not None:
+
             area = ",".join(str(i) for i in area)
             _query_params.append(("area", area))
 
         if resolution is not None:
+
             resolution = ",".join(str(i) for i in resolution)
             _query_params.append(("resolution", resolution))
 
         if limit is not None:
+
             _query_params.append(("limit", limit))
 
         if offset is not None:
+
             _query_params.append(("offset", offset))
 
         # process the header parameters
@@ -645,6 +664,7 @@ class PredictionsApi:
         limit,
         offset,
     ) -> RequestSerialized:
+
         _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
@@ -657,19 +677,24 @@ class PredictionsApi:
         # process the path parameters
         # process the query parameters
         if series_id is not None:
+
             series_id = ",".join(str(i) for i in series_id)
             _query_params.append(("series_id", series_id))
 
         if start is not None:
+
             _query_params.append(("start", start))
 
         if end is not None:
+
             _query_params.append(("end", end))
 
         if limit is not None:
+
             _query_params.append(("limit", limit))
 
         if offset is not None:
+
             _query_params.append(("offset", offset))
 
         # process the header parameters
@@ -814,6 +839,7 @@ class PredictionsApi:
         limit,
         offset,
     ) -> RequestSerialized:
+
         _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
@@ -826,16 +852,20 @@ class PredictionsApi:
         # process the path parameters
         # process the query parameters
         if max_event_time is not None:
+
             _query_params.append(("max_event_time", max_event_time))
 
         if series_id is not None:
+
             series_id = ",".join(str(i) for i in series_id)
             _query_params.append(("series_id", series_id))
 
         if limit is not None:
+
             _query_params.append(("limit", limit))
 
         if offset is not None:
+
             _query_params.append(("offset", offset))
 
         # process the header parameters
@@ -996,6 +1026,7 @@ class PredictionsApi:
         offset,
         versioned_series,
     ) -> RequestSerialized:
+
         _collection_formats: Dict[str, str] = {
             "VersionedSeries": "",
         }
@@ -1010,18 +1041,23 @@ class PredictionsApi:
         # process the path parameters
         # process the query parameters
         if include_simulated is not None:
+
             _query_params.append(("include_simulated", include_simulated))
 
         if start is not None:
+
             _query_params.append(("start", start))
 
         if end is not None:
+
             _query_params.append(("end", end))
 
         if limit is not None:
+
             _query_params.append(("limit", limit))
 
         if offset is not None:
+
             _query_params.append(("offset", offset))
 
         # process the header parameters

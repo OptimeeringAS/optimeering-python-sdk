@@ -103,9 +103,11 @@ class PredictionsData(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "events": [PredictionsEvent.from_dict(_item) for _item in obj["events"]]
-                if obj.get("events") is not None
-                else None,
+                "events": (
+                    [PredictionsEvent.from_dict(_item) for _item in obj["events"]]
+                    if obj.get("events") is not None
+                    else None
+                ),
                 "series_id": obj.get("series_id"),
                 "version": obj.get("version"),
             }
