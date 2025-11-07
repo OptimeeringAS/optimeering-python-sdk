@@ -4,6 +4,8 @@
     Optimeering
 
 """  # noqa: E501
+from http.client import IncompleteRead
+from time import sleep
 from typing import Any, Dict, List, Optional, Tuple, Union
 
 from optimeering.api_client import OptimeeringClient, RequestSerialized
@@ -15,6 +17,7 @@ from optimeering.models.versioned_series import VersionedSeries
 from optimeering.silent_type_cast import silent_type_cast
 from pydantic import Field, StrictBool, StrictFloat, StrictInt, StrictStr, validate_call
 from typing_extensions import Annotated
+from urllib3.exceptions import ProtocolError
 
 
 class PredictionsApi:
@@ -67,8 +70,16 @@ class PredictionsApi:
             "422": "HTTPValidationError",
         }
 
-        response_data = self.api_client.call_api(*_param, _request_timeout=_request_timeout)
-        response_data.read()
+        for _read_retry in range(4):
+            try:
+                response_data = self.api_client.call_api(*_param, _request_timeout=_request_timeout)
+                response_data.read()
+            except (ProtocolError, IncompleteRead) as err:
+                if _read_retry >= 3:
+                    raise err
+                sleep(_read_retry)
+            else:
+                break
         response = self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
@@ -194,8 +205,16 @@ class PredictionsApi:
             "422": "HTTPValidationError",
         }
 
-        response_data = self.api_client.call_api(*_param, _request_timeout=_request_timeout)
-        response_data.read()
+        for _read_retry in range(4):
+            try:
+                response_data = self.api_client.call_api(*_param, _request_timeout=_request_timeout)
+                response_data.read()
+            except (ProtocolError, IncompleteRead) as err:
+                if _read_retry >= 3:
+                    raise err
+                sleep(_read_retry)
+            else:
+                break
         paginated_response = self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
@@ -406,8 +425,16 @@ class PredictionsApi:
             "422": "HTTPValidationError",
         }
 
-        response_data = self.api_client.call_api(*_param, _request_timeout=_request_timeout)
-        response_data.read()
+        for _read_retry in range(4):
+            try:
+                response_data = self.api_client.call_api(*_param, _request_timeout=_request_timeout)
+                response_data.read()
+            except (ProtocolError, IncompleteRead) as err:
+                if _read_retry >= 3:
+                    raise err
+                sleep(_read_retry)
+            else:
+                break
         response = self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
@@ -551,8 +578,16 @@ class PredictionsApi:
             "422": "HTTPValidationError",
         }
 
-        response_data = self.api_client.call_api(*_param, _request_timeout=_request_timeout)
-        response_data.read()
+        for _read_retry in range(4):
+            try:
+                response_data = self.api_client.call_api(*_param, _request_timeout=_request_timeout)
+                response_data.read()
+            except (ProtocolError, IncompleteRead) as err:
+                if _read_retry >= 3:
+                    raise err
+                sleep(_read_retry)
+            else:
+                break
         paginated_response = self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
@@ -661,7 +696,7 @@ class PredictionsApi:
         max_event_time: Annotated[
             Optional[Any],
             Field(
-                description="If specified, will only return the latest prediction available at the specified time. If not specified, no filtering on event_time is done. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)"
+                description="If specified, will only return the latest prediction available at the specified time. If not specified, no filters are applied. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)"
             ),
         ] = None,
         series_id: Annotated[
@@ -684,7 +719,7 @@ class PredictionsApi:
         To get predictions for a particular version, use the :any:`retrieve_versioned`  method.
 
 
-        :param max_event_time: If specified, will only return the latest prediction available at the specified time. If not specified, no filtering on event_time is done. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)
+        :param max_event_time: If specified, will only return the latest prediction available at the specified time. If not specified, no filters are applied. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)
         :type max_event_time: MaxEventTime
         :param series_id: Series ID to filter. If not specified, will return an exception.
         :type series_id: List[StrictInt]
@@ -713,8 +748,16 @@ class PredictionsApi:
             "422": "HTTPValidationError",
         }
 
-        response_data = self.api_client.call_api(*_param, _request_timeout=_request_timeout)
-        response_data.read()
+        for _read_retry in range(4):
+            try:
+                response_data = self.api_client.call_api(*_param, _request_timeout=_request_timeout)
+                response_data.read()
+            except (ProtocolError, IncompleteRead) as err:
+                if _read_retry >= 3:
+                    raise err
+                sleep(_read_retry)
+            else:
+                break
         paginated_response = self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
@@ -885,8 +928,16 @@ class PredictionsApi:
             "422": "HTTPValidationError",
         }
 
-        response_data = self.api_client.call_api(*_param, _request_timeout=_request_timeout)
-        response_data.read()
+        for _read_retry in range(4):
+            try:
+                response_data = self.api_client.call_api(*_param, _request_timeout=_request_timeout)
+                response_data.read()
+            except (ProtocolError, IncompleteRead) as err:
+                if _read_retry >= 3:
+                    raise err
+                sleep(_read_retry)
+            else:
+                break
         paginated_response = self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,

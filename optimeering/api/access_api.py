@@ -4,6 +4,8 @@
     Optimeering
 
 """  # noqa: E501
+from http.client import IncompleteRead
+from time import sleep
 from typing import Dict, List, Optional, Tuple, Union
 
 from optimeering.api_client import OptimeeringClient, RequestSerialized
@@ -13,6 +15,7 @@ from optimeering.models.access_key_post_response import AccessKeyPostResponse
 from optimeering.models.access_post_key import AccessPostKey
 from pydantic import Field, StrictFloat, StrictInt, validate_call
 from typing_extensions import Annotated
+from urllib3.exceptions import ProtocolError
 
 
 class AccessApi:
@@ -66,8 +69,16 @@ class AccessApi:
             "422": "HTTPValidationError",
         }
 
-        response_data = self.api_client.call_api(*_param, _request_timeout=_request_timeout)
-        response_data.read()
+        for _read_retry in range(4):
+            try:
+                response_data = self.api_client.call_api(*_param, _request_timeout=_request_timeout)
+                response_data.read()
+            except (ProtocolError, IncompleteRead) as err:
+                if _read_retry >= 3:
+                    raise err
+                sleep(_read_retry)
+            else:
+                break
         response = self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
@@ -147,8 +158,16 @@ class AccessApi:
             "422": "HTTPValidationError",
         }
 
-        response_data = self.api_client.call_api(*_param, _request_timeout=_request_timeout)
-        response_data.read()
+        for _read_retry in range(4):
+            try:
+                response_data = self.api_client.call_api(*_param, _request_timeout=_request_timeout)
+                response_data.read()
+            except (ProtocolError, IncompleteRead) as err:
+                if _read_retry >= 3:
+                    raise err
+                sleep(_read_retry)
+            else:
+                break
         response = self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
@@ -227,8 +246,16 @@ class AccessApi:
             "422": "HTTPValidationError",
         }
 
-        response_data = self.api_client.call_api(*_param, _request_timeout=_request_timeout)
-        response_data.read()
+        for _read_retry in range(4):
+            try:
+                response_data = self.api_client.call_api(*_param, _request_timeout=_request_timeout)
+                response_data.read()
+            except (ProtocolError, IncompleteRead) as err:
+                if _read_retry >= 3:
+                    raise err
+                sleep(_read_retry)
+            else:
+                break
         paginated_response = self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,

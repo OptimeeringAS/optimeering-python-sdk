@@ -1,67 +1,55 @@
 python_sources()
 
 #### CREATE OPENAPI SCHEMA ####
-python_source(
-    name="fix-openapi-extensions",
-    source="fix_openapi_extensions.py",
-)
+python_source(name="fix-openapi-extensions", source="fix_openapi_extensions.py")
 
 # To get the SHA and the length, use the following command
 # curl -L https://app.optimeering.com/api/docs/openapi.json | tee >(wc -c) >(shasum -a 256) >/dev/null
 resource(
     name="openapi-schema",
     source=http_source(
-        len=115903,
-        sha256="084dfa6db6a07f1c7ce3e46333ebadb6809bcdf18810c473c28bc84bcb44e981",
         url="https://app.optimeering.com/api/docs/openapi.json",
+        sha256="f9e2c72305a83ced68628f4a8385d83c224559562cec794c81e7177927e926fb",
+        len=115746,
     ),
 )
 # resource(name="openapi-schema", source="openapi.json")
 
 adhoc_tool(
     name="run-fix-openapi-extensions",
-    args=[
-        "-s",
-        "openapi.json",
-    ],
+    runnable=":fix-openapi-extensions",
+    args=["-s", "openapi.json"],
     execution_dependencies=[
         ":openapi-schema",
     ],
-    root_output_directory=".",
-    runnable=":fix-openapi-extensions",
     stdout="generate/openapi.json",
+    root_output_directory=".",
 )
 
 #### CREATE GENERATOR CONFIG ####
-python_source(
-    name="create-config",
-    dependencies=["//:pyproject"],
-    source="create_config.py",
-)
+python_source(name="create-config", source="create_config.py", dependencies=["//:pyproject"])
 
 adhoc_tool(
     name="run-create-config",
-    root_output_directory=".",
     runnable=":create-config",
     stdout="generate/config.json",
+    root_output_directory=".",
 )
 
 #### GENERATE CLIENT ####
-files(
-    name="generator-files",
-    sources=["python_templates/**"],
-)
+files(name="generator-files", sources=["python_templates/**"])
 
 # Specify JAR dependencies
 jvm_artifact(
     name="openapi-generator",
-    artifact="openapi-generator-cli",
     group="org.openapitools",
-    version="7.10.0",
+    artifact="openapi-generator-cli",
+    version="7.13.0",
 )
 
 adhoc_tool(
     name="generator",
+    runnable=":openapi-generator",
     args=[
         "generate",
         "-i",
@@ -85,9 +73,8 @@ adhoc_tool(
     output_directories=[
         "./optimeering",
     ],
-    root_output_directory=".",
-    runnable=":openapi-generator",
     workdir=".",
+    root_output_directory=".",
 )
 
 shell_command(
