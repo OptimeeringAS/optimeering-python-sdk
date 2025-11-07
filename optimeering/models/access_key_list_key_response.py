@@ -90,9 +90,11 @@ class AccessKeyListKeyResponse(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "items": [AccessKeyCreated.from_dict(_item) for _item in obj["items"]]
-                if obj.get("items") is not None
-                else None,
+                "items": (
+                    [AccessKeyCreated.from_dict(_item) for _item in obj["items"]]
+                    if obj.get("items") is not None
+                    else None
+                ),
                 "next_page": obj.get("next_page"),
             }
         )

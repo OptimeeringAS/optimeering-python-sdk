@@ -12,16 +12,24 @@ python_distribution(
     output_path="optimeering-python-sdk",
     provides=python_artifact(
         name="optimeering",
-        version="0.0.4",
-        description="Optimeering Python Client",
-        long_description_content_type="text/markdown",
         author="Optimeering",
         classifiers=[
             "Programming Language :: Python :: 3.10",
             "Programming Language :: Python :: 3.11",
         ],
+        description="Optimeering Python Client",
+        long_description_content_type="text/markdown",
+        version="0.0.5",
     ),
-    wheel_config_settings={"--global-option": ["--python-tag", "py310.py311"]},
+    wheel_config_settings={
+        "--build-option": [
+            "--python-tag",
+            "py310.py311",
+        ],
+    },
 )
 
-file(name="pyproject", source="pyproject.toml")
+file(
+    name="pyproject",
+    source="pyproject.toml",
+)

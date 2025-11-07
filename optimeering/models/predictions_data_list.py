@@ -90,9 +90,11 @@ class PredictionsDataList(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "items": [PredictionsData.from_dict(_item) for _item in obj["items"]]
-                if obj.get("items") is not None
-                else None,
+                "items": (
+                    [PredictionsData.from_dict(_item) for _item in obj["items"]]
+                    if obj.get("items") is not None
+                    else None
+                ),
                 "next_page": obj.get("next_page"),
             }
         )

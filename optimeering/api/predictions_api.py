@@ -4,6 +4,8 @@
     Optimeering
 
 """  # noqa: E501
+from http.client import IncompleteRead
+from time import sleep
 from typing import Any, Dict, List, Optional, Tuple, Union
 
 from optimeering.api_client import OptimeeringClient, RequestSerialized
@@ -15,6 +17,7 @@ from optimeering.models.versioned_series import VersionedSeries
 from optimeering.silent_type_cast import silent_type_cast
 from pydantic import Field, StrictBool, StrictFloat, StrictInt, StrictStr, validate_call
 from typing_extensions import Annotated
+from urllib3.exceptions import ProtocolError
 
 
 class PredictionsApi:
@@ -38,7 +41,7 @@ class PredictionsApi:
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]],
         ] = None,
-    ) -> object:
+    ) -> Dict[str, object]:
         """Parameter Route
 
         Allowed values for each parameter used in filters on the **predictions** routes
@@ -46,7 +49,7 @@ class PredictionsApi:
         :param param: (required)
         :type param: str
         :return: Returns the result object.
-        :rtype: object
+        :rtype: Dict[str, object]
 
         :Example:
 
@@ -63,12 +66,20 @@ class PredictionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "object",
+            "200": "Dict[str, object]",
             "422": "HTTPValidationError",
         }
 
-        response_data = self.api_client.call_api(*_param, _request_timeout=_request_timeout)
-        response_data.read()
+        for _read_retry in range(4):
+            try:
+                response_data = self.api_client.call_api(*_param, _request_timeout=_request_timeout)
+                response_data.read()
+            except (ProtocolError, IncompleteRead) as err:
+                if _read_retry >= 3:
+                    raise err
+                sleep(_read_retry)
+            else:
+                break
         response = self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
@@ -79,6 +90,7 @@ class PredictionsApi:
         self,
         param,
     ) -> RequestSerialized:
+
         _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
@@ -194,8 +206,16 @@ class PredictionsApi:
             "422": "HTTPValidationError",
         }
 
-        response_data = self.api_client.call_api(*_param, _request_timeout=_request_timeout)
-        response_data.read()
+        for _read_retry in range(4):
+            try:
+                response_data = self.api_client.call_api(*_param, _request_timeout=_request_timeout)
+                response_data.read()
+            except (ProtocolError, IncompleteRead) as err:
+                if _read_retry >= 3:
+                    raise err
+                sleep(_read_retry)
+            else:
+                break
         paginated_response = self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
@@ -256,6 +276,7 @@ class PredictionsApi:
         limit,
         offset,
     ) -> RequestSerialized:
+
         _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
@@ -268,33 +289,41 @@ class PredictionsApi:
         # process the path parameters
         # process the query parameters
         if id is not None:
+
             id = ",".join(str(i) for i in id)
             _query_params.append(("id", id))
 
         if product is not None:
+
             product = ",".join(str(i) for i in product)
             _query_params.append(("product", product))
 
         if unit_type is not None:
+
             unit_type = ",".join(str(i) for i in unit_type)
             _query_params.append(("unit_type", unit_type))
 
         if statistic is not None:
+
             statistic = ",".join(str(i) for i in statistic)
             _query_params.append(("statistic", statistic))
 
         if area is not None:
+
             area = ",".join(str(i) for i in area)
             _query_params.append(("area", area))
 
         if resolution is not None:
+
             resolution = ",".join(str(i) for i in resolution)
             _query_params.append(("resolution", resolution))
 
         if limit is not None:
+
             _query_params.append(("limit", limit))
 
         if offset is not None:
+
             _query_params.append(("offset", offset))
 
         # process the header parameters
@@ -406,8 +435,16 @@ class PredictionsApi:
             "422": "HTTPValidationError",
         }
 
-        response_data = self.api_client.call_api(*_param, _request_timeout=_request_timeout)
-        response_data.read()
+        for _read_retry in range(4):
+            try:
+                response_data = self.api_client.call_api(*_param, _request_timeout=_request_timeout)
+                response_data.read()
+            except (ProtocolError, IncompleteRead) as err:
+                if _read_retry >= 3:
+                    raise err
+                sleep(_read_retry)
+            else:
+                break
         response = self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
@@ -425,6 +462,7 @@ class PredictionsApi:
         limit,
         offset,
     ) -> RequestSerialized:
+
         _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
@@ -437,33 +475,41 @@ class PredictionsApi:
         # process the path parameters
         # process the query parameters
         if id is not None:
+
             id = ",".join(str(i) for i in id)
             _query_params.append(("id", id))
 
         if product is not None:
+
             product = ",".join(str(i) for i in product)
             _query_params.append(("product", product))
 
         if unit_type is not None:
+
             unit_type = ",".join(str(i) for i in unit_type)
             _query_params.append(("unit_type", unit_type))
 
         if statistic is not None:
+
             statistic = ",".join(str(i) for i in statistic)
             _query_params.append(("statistic", statistic))
 
         if area is not None:
+
             area = ",".join(str(i) for i in area)
             _query_params.append(("area", area))
 
         if resolution is not None:
+
             resolution = ",".join(str(i) for i in resolution)
             _query_params.append(("resolution", resolution))
 
         if limit is not None:
+
             _query_params.append(("limit", limit))
 
         if offset is not None:
+
             _query_params.append(("offset", offset))
 
         # process the header parameters
@@ -494,13 +540,13 @@ class PredictionsApi:
         start: Annotated[
             Optional[Any],
             Field(
-                description="The first datetime to fetch (inclusive). Defaults to `1970-01-01 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)"
+                description="The first datetime to fetch (inclusive).  This filter applies to `event_time`. Defaults to `1970-01-01 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)"
             ),
         ] = None,
         end: Annotated[
             Optional[Any],
             Field(
-                description="The last datetime to fetch (exclusive). Defaults to `2999-12-30 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)"
+                description="The last datetime to fetch (exclusive).  This filter applies to `event_time`. Defaults to `2999-12-30 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)"
             ),
         ] = None,
         _request_timeout: Union[
@@ -521,10 +567,10 @@ class PredictionsApi:
 
         :param series_id: Series ID to filter. If not specified, will return an exception.
         :type series_id: List[StrictInt]
-        :param start: The first datetime to fetch (inclusive). Defaults to `1970-01-01 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)
-        :type start: Start
-        :param end: The last datetime to fetch (exclusive). Defaults to `2999-12-30 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)
-        :type end: End
+        :param start: The first datetime to fetch (inclusive).  This filter applies to `event_time`. Defaults to `1970-01-01 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)
+        :type start: EventTimeStart
+        :param end: The last datetime to fetch (exclusive).  This filter applies to `event_time`. Defaults to `2999-12-30 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)
+        :type end: EventTimeEnd
         :return: Returns the result object.
         :rtype: PredictionsDataList
 
@@ -551,8 +597,16 @@ class PredictionsApi:
             "422": "HTTPValidationError",
         }
 
-        response_data = self.api_client.call_api(*_param, _request_timeout=_request_timeout)
-        response_data.read()
+        for _read_retry in range(4):
+            try:
+                response_data = self.api_client.call_api(*_param, _request_timeout=_request_timeout)
+                response_data.read()
+            except (ProtocolError, IncompleteRead) as err:
+                if _read_retry >= 3:
+                    raise err
+                sleep(_read_retry)
+            else:
+                break
         paginated_response = self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
@@ -610,6 +664,7 @@ class PredictionsApi:
         limit,
         offset,
     ) -> RequestSerialized:
+
         _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
@@ -622,19 +677,24 @@ class PredictionsApi:
         # process the path parameters
         # process the query parameters
         if series_id is not None:
+
             series_id = ",".join(str(i) for i in series_id)
             _query_params.append(("series_id", series_id))
 
         if start is not None:
+
             _query_params.append(("start", start))
 
         if end is not None:
+
             _query_params.append(("end", end))
 
         if limit is not None:
+
             _query_params.append(("limit", limit))
 
         if offset is not None:
+
             _query_params.append(("offset", offset))
 
         # process the header parameters
@@ -661,7 +721,7 @@ class PredictionsApi:
         max_event_time: Annotated[
             Optional[Any],
             Field(
-                description="If specified, will only return the latest prediction available at the specified time. If not specified, no filters are applied. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)"
+                description="If specified, will only return the latest prediction available at the specified time. If not specified, no filtering on event_time is done. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)"
             ),
         ] = None,
         series_id: Annotated[
@@ -684,7 +744,7 @@ class PredictionsApi:
         To get predictions for a particular version, use the :any:`retrieve_versioned`  method.
 
 
-        :param max_event_time: If specified, will only return the latest prediction available at the specified time. If not specified, no filters are applied. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)
+        :param max_event_time: If specified, will only return the latest prediction available at the specified time. If not specified, no filtering on event_time is done. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)
         :type max_event_time: MaxEventTime
         :param series_id: Series ID to filter. If not specified, will return an exception.
         :type series_id: List[StrictInt]
@@ -713,8 +773,16 @@ class PredictionsApi:
             "422": "HTTPValidationError",
         }
 
-        response_data = self.api_client.call_api(*_param, _request_timeout=_request_timeout)
-        response_data.read()
+        for _read_retry in range(4):
+            try:
+                response_data = self.api_client.call_api(*_param, _request_timeout=_request_timeout)
+                response_data.read()
+            except (ProtocolError, IncompleteRead) as err:
+                if _read_retry >= 3:
+                    raise err
+                sleep(_read_retry)
+            else:
+                break
         paginated_response = self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
@@ -771,6 +839,7 @@ class PredictionsApi:
         limit,
         offset,
     ) -> RequestSerialized:
+
         _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
@@ -783,16 +852,20 @@ class PredictionsApi:
         # process the path parameters
         # process the query parameters
         if max_event_time is not None:
+
             _query_params.append(("max_event_time", max_event_time))
 
         if series_id is not None:
+
             series_id = ",".join(str(i) for i in series_id)
             _query_params.append(("series_id", series_id))
 
         if limit is not None:
+
             _query_params.append(("limit", limit))
 
         if offset is not None:
+
             _query_params.append(("offset", offset))
 
         # process the header parameters
@@ -823,13 +896,13 @@ class PredictionsApi:
         start: Annotated[
             Optional[Any],
             Field(
-                description="The first datetime to fetch (inclusive). Defaults to `1970-01-01 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)"
+                description="The first datetime to fetch (inclusive).  This filter applies to `event_time`. Defaults to `1970-01-01 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)"
             ),
         ] = None,
         end: Annotated[
             Optional[Any],
             Field(
-                description="The last datetime to fetch (exclusive). Defaults to `2999-12-30 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)"
+                description="The last datetime to fetch (exclusive).  This filter applies to `event_time`. Defaults to `2999-12-30 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)"
             ),
         ] = None,
         versioned_series: Optional[List[VersionedSeries] | PredictionsVersionList] = None,
@@ -852,10 +925,10 @@ class PredictionsApi:
 
         :param include_simulated: If false, filters out simulated prediction from response.
         :type include_simulated: bool
-        :param start: The first datetime to fetch (inclusive). Defaults to `1970-01-01 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)
-        :type start: Start
-        :param end: The last datetime to fetch (exclusive). Defaults to `2999-12-30 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)
-        :type end: End
+        :param start: The first datetime to fetch (inclusive).  This filter applies to `event_time`. Defaults to `1970-01-01 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)
+        :type start: EventTimeStart
+        :param end: The last datetime to fetch (exclusive).  This filter applies to `event_time`. Defaults to `2999-12-30 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)
+        :type end: EventTimeEnd
         :param versioned_series:
         :type versioned_series: Optional[List[VersionedSeries] | PredictionsVersionList]
         :return: Returns the result object.
@@ -885,8 +958,16 @@ class PredictionsApi:
             "422": "HTTPValidationError",
         }
 
-        response_data = self.api_client.call_api(*_param, _request_timeout=_request_timeout)
-        response_data.read()
+        for _read_retry in range(4):
+            try:
+                response_data = self.api_client.call_api(*_param, _request_timeout=_request_timeout)
+                response_data.read()
+            except (ProtocolError, IncompleteRead) as err:
+                if _read_retry >= 3:
+                    raise err
+                sleep(_read_retry)
+            else:
+                break
         paginated_response = self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
@@ -945,6 +1026,7 @@ class PredictionsApi:
         offset,
         versioned_series,
     ) -> RequestSerialized:
+
         _collection_formats: Dict[str, str] = {
             "VersionedSeries": "",
         }
@@ -959,18 +1041,23 @@ class PredictionsApi:
         # process the path parameters
         # process the query parameters
         if include_simulated is not None:
+
             _query_params.append(("include_simulated", include_simulated))
 
         if start is not None:
+
             _query_params.append(("start", start))
 
         if end is not None:
+
             _query_params.append(("end", end))
 
         if limit is not None:
+
             _query_params.append(("limit", limit))
 
         if offset is not None:
+
             _query_params.append(("offset", offset))
 
         # process the header parameters

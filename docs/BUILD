@@ -1,4 +1,7 @@
-files(name="source", sources=["source/**"])
+files(
+    name="source",
+    sources=["source/**"],
+)
 
 pex_binary(
     name="sphinx",
@@ -12,6 +15,10 @@ pex_binary(
         "//:root#sphinx-rtd-theme",
         "//:root#setuptools",
         "//:root#toml",
+        "//:root#urllib3",
+        "//:root#typing-extensions",
+        "//:root#types-python-dateutil",
+        "//:root#sphinx-autodoc-typehints",
         "//optimeering:optimeering",
     ],
     script="sphinx-build",
@@ -19,19 +26,28 @@ pex_binary(
 
 adhoc_tool(
     name="gen-tool",
-    runnable=":sphinx",
-    args=["-M", "html", "source", "generated-site"],
-    execution_dependencies=[":source", "//:pyproject"],
+    args=[
+        "-M",
+        "html",
+        "source",
+        "generated-site",
+    ],
+    execution_dependencies=[
+        ":source",
+        "//:pyproject",
+        "//optimeering:optimeering",
+    ],
     output_directories=[""],
     output_files=["generated-site/**"],
+    runnable=":sphinx",
 )
 
 run_shell_command(
     name="build-docs",
-    execution_dependencies=[":gen-tool"],
     command="""rm -rf docs/site
     mkdir docs/site
     cp -r {chroot}/docs/generated-site/html/. docs/site
     """,
+    execution_dependencies=[":gen-tool"],
     workdir="",
 )

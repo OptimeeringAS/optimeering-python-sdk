@@ -49,11 +49,13 @@ def silent_type_cast(fn):
                 new_args.append(getattr(arg, parameter_conversion[_param_name])())
         new_args_tuple = tuple(new_args)
         kwargs = {
-            k: getattr(v, parameter_conversion[k])()
-            if v  # not null
-            and k in parameter_conversion  # parameter allows conversion
-            and hasattr(v, parameter_conversion[k])  # conversion fn exists
-            else v
+            k: (
+                getattr(v, parameter_conversion[k])()
+                if v  # not null
+                and k in parameter_conversion  # parameter allows conversion
+                and hasattr(v, parameter_conversion[k])  # conversion fn exists
+                else v
+            )
             for k, v in kwargs.items()
         }
         return fn(*new_args_tuple, **kwargs)

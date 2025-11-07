@@ -3,6 +3,7 @@ import logging
 import os
 import tempfile
 import time
+from json.decoder import JSONDecodeError
 
 from azure.core.credentials import AccessToken
 from azure.identity import (
@@ -49,7 +50,7 @@ class AzureAuth:
                     token_strs = json.loads(fh.read())
                     self.__tokens = {k: AccessToken(v[0], v[1]) for (k, v) in token_strs.items()}
                 token = self.__tokens.get(uri, None)
-            except FileNotFoundError:
+            except (FileNotFoundError, JSONDecodeError):
                 pass
 
         if token:

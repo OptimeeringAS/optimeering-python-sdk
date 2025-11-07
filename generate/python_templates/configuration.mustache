@@ -11,7 +11,7 @@ from urllib.parse import urlparse
 import multiprocessing
 {{/asyncio}}
 import sys
-from typing import Optional, Dict, Union
+from typing import Any, Optional, Dict, Union, Self
 import urllib3
 
 import http.client as httplib
@@ -158,7 +158,7 @@ class Configuration:
         """date format
         """
 
-    def __deepcopy__(self, memo):
+    def __deepcopy__(self, memo:  Dict[int, Any]) -> Self:
         cls = self.__class__
         result = cls.__new__(cls)
         memo[id(self)] = result
@@ -172,7 +172,7 @@ class Configuration:
         result.debug = self.debug
         return result
 
-    def __setattr__(self, name, value):
+    def __setattr__(self, name: str, value: Any) -> None:
         object.__setattr__(self, name, value)
 {{#hasHttpSignatureMethods}}
         if name == "signing_info" and value is not None:
@@ -182,7 +182,7 @@ class Configuration:
 {{/hasHttpSignatureMethods}}
 
     @classmethod
-    def set_default(cls, default):
+    def set_default(cls, default: Optional[Self]) -> None:
         """Set default instance of configuration.
 
         It stores default configuration, which can be
@@ -193,7 +193,7 @@ class Configuration:
         cls._default = default
 
     @classmethod
-    def get_default_copy(cls):
+    def get_default_copy(cls) -> Self:
         """Deprecated. Please use `get_default` instead.
 
         Deprecated. Please use `get_default` instead.
@@ -203,7 +203,7 @@ class Configuration:
         return cls.get_default()
 
     @classmethod
-    def get_default(cls):
+    def get_default(cls) -> Self:
         """Return the default configuration.
 
         This method returns newly created, based on default constructor,
@@ -213,22 +213,20 @@ class Configuration:
         :return: The configuration object.
         """
         if cls._default is None:
-            cls._default = Configuration()
+            cls._default = cls()
         return cls._default
 
     @property
-    def logger_file(self):
+    def logger_file(self) -> Optional[str]:
         """The logger file.
 
         If the logger_file is None, then add stream handler and remove file
         handler. Otherwise, add file handler and remove stream handler.
-
-        :type: str
         """
         return self.__logger_file
 
     @logger_file.setter
-    def logger_file(self, value):
+    def logger_file(self, value: Optional[str]) -> None:
         """The logger file.
 
         If the logger_file is None, then add stream handler and remove file
@@ -247,12 +245,12 @@ class Configuration:
                 logger.addHandler(self.logger_file_handler)
 
     @property
-    def debug(self):
+    def debug(self) -> bool:
         """Debug status"""
         return self.__debug
 
     @debug.setter
-    def debug(self, value):
+    def debug(self, value: bool) -> None:
         """Debug status
 
         :param value: The debug status, True or False.
@@ -274,14 +272,15 @@ class Configuration:
             httplib.HTTPConnection.debuglevel = 0
 
     @property
-    def logger_format(self):
+    def logger_format(self) -> str:
         """The logger format.
+
         The logger_formatter will be updated when sets logger_format.
         """
         return self.__logger_format
 
     @logger_format.setter
-    def logger_format(self, value):
+    def logger_format(self, value: str) -> None:
         """The logger format.
 
         The logger_formatter will be updated when sets logger_format.
@@ -291,18 +290,6 @@ class Configuration:
         """
         self.__logger_format = value
         self.logger_formatter = logging.Formatter(self.__logger_format)
-
-    def to_debug_report(self):
-        """Gets the essential information for debugging.
-
-        :return: The report for debugging.
-        """
-        return "Python SDK Debug Report:\n"\
-               "OS: {env}\n"\
-               "Python Version: {pyversion}\n"\
-               "Version of the API: {{version}}\n"\
-               "SDK Package Version: {{packageVersion}}".\
-               format(env=sys.platform, pyversion=sys.version)
 
     @property
     def host(self)->str:

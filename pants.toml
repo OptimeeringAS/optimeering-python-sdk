@@ -1,5 +1,5 @@
 [GLOBAL]
-pants_version = "2.21.0"
+pants_version = "2.29.0"
 build_ignore = ['.github/**', 'examples/**']
 
 backend_packages = [
@@ -17,7 +17,7 @@ backend_packages = [
 ]
 
 [python]
-interpreter_constraints = [">=3.10,<4.0"]
+interpreter_constraints = [">=3.11,<4.0"]
 enable_resolves = true
 
 resolves = { python-default = "python-default.lock" }

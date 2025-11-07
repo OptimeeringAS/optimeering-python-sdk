@@ -93,9 +93,11 @@ class PredictionsVersionList(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "items": [PredictionsVersion.from_dict(_item) for _item in obj["items"]]
-                if obj.get("items") is not None
-                else None,
+                "items": (
+                    [PredictionsVersion.from_dict(_item) for _item in obj["items"]]
+                    if obj.get("items") is not None
+                    else None
+                ),
                 "next_page": obj.get("next_page"),
             }
         )
@@ -129,8 +131,8 @@ class PredictionsVersionList(BaseModel):
 
 
                 :param include_simulated: If false, filters out simulated prediction from response.
-                :param start: The first datetime to fetch (inclusive). Defaults to `1970-01-01 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)
-                :param end: The last datetime to fetch (exclusive). Defaults to `2999-12-30 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)
+                :param start: The first datetime to fetch (inclusive).  This filter applies to `event_time`. Defaults to `1970-01-01 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)
+                :param end: The last datetime to fetch (exclusive).  This filter applies to `event_time`. Defaults to `2999-12-30 00:00:00+0000`. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)
         """
         if self._client is None:
             raise AttributeError("Cannot call datapoints method on this instance. The client has not been setup.")
