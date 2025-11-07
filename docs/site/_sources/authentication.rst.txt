@@ -22,7 +22,7 @@ In your terminal run:
 
 .. code-block:: console
 
-    az login --scope api://app.optimeering.com/.default --allow-no-subscriptions
+    az login --scope api://app.optimeering.com/.default --allow-no-subscriptions --tenant optimeering.com
 
 ----------------------
 Configuring the Client
