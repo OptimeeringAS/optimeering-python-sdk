@@ -20,7 +20,7 @@ MAXEVENTTIME_ANY_OF_SCHEMAS = ["datetime", "str"]
 
 class MaxEventTime(BaseModel):
     """
-    If specified, will only return the latest prediction available at the specified time. If not specified, no filters are applied. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)
+    If specified, will only return the latest prediction available at the specified time. If not specified, no filtering on event_time is done. Should be specified in ISO 8601 datetime or duration format (eg - `2024-05-15T06:00:00+00:00`, `PT1H`, `-P1W1D`)
     """
 
     # data type: str

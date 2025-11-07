@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="./">
 <head>
@@ -10,15 +12,11 @@
 
   
     <link rel="shortcut icon" href="_static/favicon.ico"/>
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="_static/jquery.js?v=5d32c60e"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=e3a6060d"></script>
-        <script src="_static/doctools.js?v=9a2dae69"></script>
-        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=e3a6060d"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -73,7 +71,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#optimeering.Configuration.logger_file"><code class="docutils literal notranslate"><span class="pre">Configuration.logger_file</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#optimeering.Configuration.debug"><code class="docutils literal notranslate"><span class="pre">Configuration.debug</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#optimeering.Configuration.logger_format"><code class="docutils literal notranslate"><span class="pre">Configuration.logger_format</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#optimeering.Configuration.to_debug_report"><code class="docutils literal notranslate"><span class="pre">Configuration.to_debug_report()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -113,17 +110,17 @@
 <h1>Configuration<a class="headerlink" href="#configuration" title="Link to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="optimeering.Configuration">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">optimeering.</span></span><span class="sig-name descname"><span class="pre">Configuration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'https://app.optimeering.com'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_auth_url</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retries</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#optimeering.Configuration" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">optimeering.</span></span><span class="sig-name descname"><span class="pre">Configuration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'https://app.optimeering.com'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_auth_url</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retries</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#optimeering.Configuration" title="Link to this definition"></a></dt>
 <dd><p>This class is used to configure the <a class="reference internal" href="client.html#optimeering.OptimeeringClient" title="optimeering.OptimeeringClient"><code class="xref any py py-class docutils literal notranslate"><span class="pre">OptimeeringClient</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>host</strong> – API host url.</p></li>
-<li><p><strong>api_auth_url</strong> – URL for Authentication. Defaults to <cite>api://{host}/.default</cite></p></li>
-<li><p><strong>retries</strong> – Number of retries for API requests.
+<li><p><strong>host</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – API host url.</p></li>
+<li><p><strong>api_auth_url</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – URL for Authentication. Defaults to <cite>api://{host}/.default</cite></p></li>
+<li><p><strong>retries</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Retry</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code>]</span>) – Number of retries for API requests.
 Also supports a urllib <code class="docutils literal notranslate"><span class="pre">Retry</span></code> object. <a class="reference external" href="https://urllib3.readthedocs.io/en/stable/reference/urllib3.util.html#urllib3.util.Retry">See the urlib docs</a></p></li>
-<li><p><strong>api_key</strong> – API Key to use for Authentication.</p></li>
-<li><p><strong>token</strong> – Token to use for Authentication. Only use this when you don’t want to have the <a class="reference internal" href="client.html#optimeering.OptimeeringClient" title="optimeering.OptimeeringClient"><code class="xref any py py-class docutils literal notranslate"><span class="pre">OptimeeringClient</span></code></a> retrieve a token.</p></li>
+<li><p><strong>api_key</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – API Key to use for Authentication.</p></li>
+<li><p><strong>token</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – Token to use for Authentication. Only use this when you don’t want to have the <a class="reference internal" href="client.html#optimeering.OptimeeringClient" title="optimeering.OptimeeringClient"><code class="xref any py py-class docutils literal notranslate"><span class="pre">OptimeeringClient</span></code></a> retrieve a token.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Example<span class="colon">:</span></dt>
@@ -254,70 +251,68 @@ cpu_count * 5 is used as default value to increase performance.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="optimeering.Configuration.set_default">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_default</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">default</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#optimeering.Configuration.set_default" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_default</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">default</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#optimeering.Configuration.set_default" title="Link to this definition"></a></dt>
 <dd><p>Set default instance of configuration.</p>
 <p>It stores default configuration, which can be
 returned by get_default_copy method.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>default</strong> – object of Configuration</p>
+<dd class="field-odd"><p><strong>default</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Self</span></code>]</span>) – object of Configuration</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="optimeering.Configuration.get_default_copy">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_default_copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#optimeering.Configuration.get_default_copy" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_default_copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#optimeering.Configuration.get_default_copy" title="Link to this definition"></a></dt>
 <dd><p>Deprecated. Please use <cite>get_default</cite> instead.</p>
 <p>Deprecated. Please use <cite>get_default</cite> instead.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The configuration object.</p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Self</span></code></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The configuration object.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="optimeering.Configuration.get_default">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_default</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#optimeering.Configuration.get_default" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_default</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#optimeering.Configuration.get_default" title="Link to this definition"></a></dt>
 <dd><p>Return the default configuration.</p>
 <p>This method returns newly created, based on default constructor,
 object of Configuration class or returns a copy of default
 configuration.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The configuration object.</p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Self</span></code></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The configuration object.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="optimeering.Configuration.logger_file">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">logger_file</span></span><a class="headerlink" href="#optimeering.Configuration.logger_file" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">logger_file</span></span><a class="headerlink" href="#optimeering.Configuration.logger_file" title="Link to this definition"></a></dt>
 <dd><p>Debug file location</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="optimeering.Configuration.debug">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">debug</span></span><a class="headerlink" href="#optimeering.Configuration.debug" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">debug</span></span><a class="headerlink" href="#optimeering.Configuration.debug" title="Link to this definition"></a></dt>
 <dd><p>Debug status</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="optimeering.Configuration.logger_format">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">logger_format</span></span><a class="headerlink" href="#optimeering.Configuration.logger_format" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">logger_format</span></span><a class="headerlink" href="#optimeering.Configuration.logger_format" title="Link to this definition"></a></dt>
 <dd><p>Log format</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="optimeering.Configuration.to_debug_report">
-<span class="sig-name descname"><span class="pre">to_debug_report</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#optimeering.Configuration.to_debug_report" title="Link to this definition"></a></dt>
-<dd><p>Gets the essential information for debugging.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The report for debugging.</p>
-</dd>
-</dl>
 </dd></dl>
 
 </dd></dl>

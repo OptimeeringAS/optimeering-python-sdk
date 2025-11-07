@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="./">
 <head>
@@ -9,15 +11,11 @@
 
   
     <link rel="shortcut icon" href="_static/favicon.ico"/>
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="_static/jquery.js?v=5d32c60e"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=e3a6060d"></script>
-        <script src="_static/doctools.js?v=9a2dae69"></script>
-        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=e3a6060d"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="#" />
     <link rel="search" title="Search" href="search.html" /> 
@@ -173,10 +171,12 @@
 <h2 id="E">E</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="models.html#optimeering.models.End">End (class in optimeering.models)</a>
+      <li><a href="models.html#optimeering.models.EventTimeEnd">EventTimeEnd (class in optimeering.models)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="models.html#optimeering.models.EventTimeStart">EventTimeStart (class in optimeering.models)</a>
+</li>
       <li><a href="models.html#optimeering.models.ExpiresAt">ExpiresAt (class in optimeering.models)</a>
 </li>
   </ul></td>
@@ -244,7 +244,9 @@
 </li>
         <li><a href="models.html#optimeering.models.AccessPostKey.from_json">(optimeering.models.AccessPostKey class method)</a>
 </li>
-        <li><a href="models.html#optimeering.models.End.from_json">(optimeering.models.End class method)</a>
+        <li><a href="models.html#optimeering.models.EventTimeEnd.from_json">(optimeering.models.EventTimeEnd class method)</a>
+</li>
+        <li><a href="models.html#optimeering.models.EventTimeStart.from_json">(optimeering.models.EventTimeStart class method)</a>
 </li>
         <li><a href="models.html#optimeering.models.ExpiresAt.from_json">(optimeering.models.ExpiresAt class method)</a>
 </li>
@@ -267,8 +269,6 @@
         <li><a href="models.html#optimeering.models.PredictionsVersion.from_json">(optimeering.models.PredictionsVersion class method)</a>
 </li>
         <li><a href="models.html#optimeering.models.PredictionsVersionList.from_json">(optimeering.models.PredictionsVersionList class method)</a>
-</li>
-        <li><a href="models.html#optimeering.models.Start.from_json">(optimeering.models.Start class method)</a>
 </li>
         <li><a href="models.html#optimeering.models.ValidationError.from_json">(optimeering.models.ValidationError class method)</a>
 </li>
@@ -475,8 +475,6 @@
 </li>
       <li><a href="configuration.html#optimeering.Configuration.ssl_ca_cert">ssl_ca_cert (optimeering.Configuration attribute)</a>
 </li>
-      <li><a href="models.html#optimeering.models.Start">Start (class in optimeering.models)</a>
-</li>
   </ul></td>
 </tr></table>
 
@@ -484,8 +482,6 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="configuration.html#optimeering.Configuration.tls_server_name">tls_server_name (optimeering.Configuration attribute)</a>
-</li>
-      <li><a href="configuration.html#optimeering.Configuration.to_debug_report">to_debug_report() (optimeering.Configuration method)</a>
 </li>
       <li><a href="models.html#optimeering.models.AccessKeyCreated.to_dict">to_dict() (optimeering.models.AccessKeyCreated method)</a>
 
@@ -496,7 +492,9 @@
 </li>
         <li><a href="models.html#optimeering.models.AccessPostKey.to_dict">(optimeering.models.AccessPostKey method)</a>
 </li>
-        <li><a href="models.html#optimeering.models.End.to_dict">(optimeering.models.End method)</a>
+        <li><a href="models.html#optimeering.models.EventTimeEnd.to_dict">(optimeering.models.EventTimeEnd method)</a>
+</li>
+        <li><a href="models.html#optimeering.models.EventTimeStart.to_dict">(optimeering.models.EventTimeStart method)</a>
 </li>
         <li><a href="models.html#optimeering.models.ExpiresAt.to_dict">(optimeering.models.ExpiresAt method)</a>
 </li>
@@ -520,8 +518,6 @@
 </li>
         <li><a href="models.html#optimeering.models.PredictionsVersionList.to_dict">(optimeering.models.PredictionsVersionList method)</a>
 </li>
-        <li><a href="models.html#optimeering.models.Start.to_dict">(optimeering.models.Start method)</a>
-</li>
         <li><a href="models.html#optimeering.models.ValidationError.to_dict">(optimeering.models.ValidationError method)</a>
 </li>
         <li><a href="models.html#optimeering.models.ValidationErrorLocInner.to_dict">(optimeering.models.ValidationErrorLocInner method)</a>
@@ -538,7 +534,9 @@
 </li>
         <li><a href="models.html#optimeering.models.AccessPostKey.to_json">(optimeering.models.AccessPostKey method)</a>
 </li>
-        <li><a href="models.html#optimeering.models.End.to_json">(optimeering.models.End method)</a>
+        <li><a href="models.html#optimeering.models.EventTimeEnd.to_json">(optimeering.models.EventTimeEnd method)</a>
+</li>
+        <li><a href="models.html#optimeering.models.EventTimeStart.to_json">(optimeering.models.EventTimeStart method)</a>
 </li>
         <li><a href="models.html#optimeering.models.ExpiresAt.to_json">(optimeering.models.ExpiresAt method)</a>
 </li>
@@ -561,8 +559,6 @@
         <li><a href="models.html#optimeering.models.PredictionsVersion.to_json">(optimeering.models.PredictionsVersion method)</a>
 </li>
         <li><a href="models.html#optimeering.models.PredictionsVersionList.to_json">(optimeering.models.PredictionsVersionList method)</a>
-</li>
-        <li><a href="models.html#optimeering.models.Start.to_json">(optimeering.models.Start method)</a>
 </li>
         <li><a href="models.html#optimeering.models.ValidationError.to_json">(optimeering.models.ValidationError method)</a>
 </li>
@@ -614,7 +610,9 @@
 </li>
         <li><a href="models.html#optimeering.models.AccessPostKey.to_str">(optimeering.models.AccessPostKey method)</a>
 </li>
-        <li><a href="models.html#optimeering.models.End.to_str">(optimeering.models.End method)</a>
+        <li><a href="models.html#optimeering.models.EventTimeEnd.to_str">(optimeering.models.EventTimeEnd method)</a>
+</li>
+        <li><a href="models.html#optimeering.models.EventTimeStart.to_str">(optimeering.models.EventTimeStart method)</a>
 </li>
         <li><a href="models.html#optimeering.models.ExpiresAt.to_str">(optimeering.models.ExpiresAt method)</a>
 </li>
@@ -637,8 +635,6 @@
         <li><a href="models.html#optimeering.models.PredictionsVersion.to_str">(optimeering.models.PredictionsVersion method)</a>
 </li>
         <li><a href="models.html#optimeering.models.PredictionsVersionList.to_str">(optimeering.models.PredictionsVersionList method)</a>
-</li>
-        <li><a href="models.html#optimeering.models.Start.to_str">(optimeering.models.Start method)</a>
 </li>
         <li><a href="models.html#optimeering.models.ValidationError.to_str">(optimeering.models.ValidationError method)</a>
 </li>
