@@ -14,7 +14,15 @@ from datetime import datetime
 from typing import Any, ClassVar, Dict, Iterator, List, Optional, Set
 
 import orjson
-from optimeering.extras import pd, pydantic_to_pandas, require_pandas
+from optimeering.extras import (
+    pd,
+    polars,
+    pydantic_to_pandas,
+    pydantic_to_polars,
+    require_pandas,
+    require_polars,
+    require_pyarrow,
+)
 from optimeering.models.predictions_value import PredictionsValue
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, model_validator
 
@@ -153,3 +161,18 @@ class PredictionsEvent(BaseModel):
         :type unpack_value_method: str
         """
         return pydantic_to_pandas(self, unpack_value_method)
+
+    @require_polars
+    @require_pyarrow
+    def to_polars(self, unpack_value_method: str | None = None) -> "polars.DataFrame":  # type: ignore[name-defined]
+        """
+        Converts the object into a polars dataframe.
+
+        :param unpack_value_method:
+            Determines how values are unpacked. Should be one of the following:
+                1. retain_original: Do not unpack the values.
+                2. new_rows: A new row will be created in the dataframe for each unpacked value. A new column `value_category` will be added which determines the category of the value.
+                3. new_columns: A new column will be created in the dataframe for each unpacked value. The columns for unpacked values will be prepended with `value_`.
+        :type unpack_value_method: str
+        """
+        return pydantic_to_polars(self, unpack_value_method)

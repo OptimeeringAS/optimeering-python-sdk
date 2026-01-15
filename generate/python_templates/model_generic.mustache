@@ -21,7 +21,7 @@ from typing import Iterable
 import logging
 import {{packageName}}
 
-from {{packageName}}.extras import pydantic_to_pandas, require_pandas, pd
+from {{packageName}}.extras import pydantic_to_pandas, require_pandas, pd, pydantic_to_polars, require_polars, polars, require_pyarrow
 
 {{#hasChildren}}
 {{#discriminator}}
@@ -545,3 +545,4 @@ class {{classname}}({{#parent}}{{{.}}}{{/parent}}{{^parent}}BaseModel{{/parent}}
 {{/vendorExtensions.x-py-postponed-model-imports.size}}
 
 {{>pandas}}
+{{>polars}}

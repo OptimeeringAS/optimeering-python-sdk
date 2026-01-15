@@ -15,7 +15,15 @@ from typing import Any, ClassVar, Dict, List, Optional, Set
 
 import optimeering
 import orjson
-from optimeering.extras import pd, pydantic_to_pandas, require_pandas
+from optimeering.extras import (
+    pd,
+    polars,
+    pydantic_to_pandas,
+    pydantic_to_polars,
+    require_pandas,
+    require_polars,
+    require_pyarrow,
+)
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator, model_validator
 from typing_extensions import Annotated
 
@@ -34,6 +42,8 @@ class PredictionsVersion(BaseModel):
     :type id: int
     :param latest_event_time:
     :type latest_event_time: datetime
+    :param latest_simulated_event_time:
+    :type latest_simulated_event_time: datetime
     :param product: Product name for the series
     :type product: str
     :param resolution: Resolution of the series.
@@ -57,6 +67,7 @@ class PredictionsVersion(BaseModel):
     description: Optional[StrictStr] = None
     id: StrictInt
     latest_event_time: Optional[datetime] = None
+    latest_simulated_event_time: Optional[datetime] = None
     product: StrictStr = Field(description="Product name for the series")
     resolution: StrictStr = Field(description="Resolution of the series.")
     simulation_event_time_end: datetime = Field(
@@ -79,6 +90,7 @@ class PredictionsVersion(BaseModel):
         "description",
         "id",
         "latest_event_time",
+        "latest_simulated_event_time",
         "product",
         "resolution",
         "simulation_event_time_end",
@@ -143,6 +155,11 @@ class PredictionsVersion(BaseModel):
         if self.latest_event_time is None and "latest_event_time" in self.model_fields_set:
             _dict["latest_event_time"] = None
 
+        # set to None if latest_simulated_event_time (nullable) is None
+        # and model_fields_set contains the field
+        if self.latest_simulated_event_time is None and "latest_simulated_event_time" in self.model_fields_set:
+            _dict["latest_simulated_event_time"] = None
+
         return _dict
 
     @classmethod
@@ -161,6 +178,7 @@ class PredictionsVersion(BaseModel):
                 "description": obj.get("description"),
                 "id": obj.get("id"),
                 "latest_event_time": obj.get("latest_event_time"),
+                "latest_simulated_event_time": obj.get("latest_simulated_event_time"),
                 "product": obj.get("product"),
                 "resolution": obj.get("resolution"),
                 "simulation_event_time_end": obj.get("simulation_event_time_end"),
@@ -234,5 +252,18 @@ class PredictionsVersion(BaseModel):
 
         """
         return pydantic_to_pandas(
+            self,
+        )
+
+    @require_polars
+    @require_pyarrow
+    def to_polars(
+        self,
+    ) -> "polars.DataFrame":  # type: ignore[name-defined]
+        """
+        Converts the object into a polars dataframe.
+
+        """
+        return pydantic_to_polars(
             self,
         )
