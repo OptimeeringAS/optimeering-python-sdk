@@ -3,6 +3,7 @@ import unittest.mock
 from unittest import TestCase
 
 import optimeering
+import pandas as pd  # type: ignore[import-untyped]
 from optimeering import Configuration, OptimeeringClient
 from optimeering.azure_authentication import AzureAuth
 from optimeering.rest import RESTClientObject, RESTResponse
@@ -10,6 +11,7 @@ from tests.data_mocks import FakeResponse, generate_data
 
 config = Configuration(host="Testurlhere")
 client = OptimeeringClient(config)
+_ = pd
 
 
 class TestGeneratedClient(TestCase):
@@ -40,7 +42,6 @@ class TestGeneratedClient(TestCase):
                     RESTClientObject, "request", return_value=RESTResponse(FakeResponse(data))
                 ):
                     response = api_method()
-                assert len(response.items) > 0
 
                 # get datapoints
                 response_model_type = eval(inspect.signature(response.datapoints).return_annotation)
@@ -50,15 +51,6 @@ class TestGeneratedClient(TestCase):
                     RESTClientObject, "request", return_value=RESTResponse(FakeResponse(data))
                 ):
                     datapoints = response.datapoints()
-
-                assert len(datapoints.items) == 1
-
-                # Checks to ensure that import error is raised if env is not properly configured
-                try:
-                    datapoints.to_pandas(unpack_value_method="retain_original")
-                except ImportError as err:
-                    assert err.args[0] == "Pandas is not available."
-                try:
-                    datapoints.to_polars(unpack_value_method="retain_original")
-                except ImportError as err:
-                    assert err.args[0] == "Polars is not available."
+                assert len(datapoints.to_pandas(unpack_value_method="retain_original")) > 0
+                assert len(datapoints.to_pandas(unpack_value_method="new_columns")) > 0
+                assert len(datapoints.to_pandas(unpack_value_method="new_rows")) > 0

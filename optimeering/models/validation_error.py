@@ -13,7 +13,15 @@ import warnings
 from typing import Any, ClassVar, Dict, List, Optional, Set
 
 import orjson
-from optimeering.extras import pd, pydantic_to_pandas, require_pandas
+from optimeering.extras import (
+    pd,
+    polars,
+    pydantic_to_pandas,
+    pydantic_to_polars,
+    require_pandas,
+    require_polars,
+    require_pyarrow,
+)
 from optimeering.models.validation_error_loc_inner import ValidationErrorLocInner
 from pydantic import BaseModel, ConfigDict, StrictStr, model_validator
 
@@ -127,5 +135,18 @@ class ValidationError(BaseModel):
 
         """
         return pydantic_to_pandas(
+            self,
+        )
+
+    @require_polars
+    @require_pyarrow
+    def to_polars(
+        self,
+    ) -> "polars.DataFrame":  # type: ignore[name-defined]
+        """
+        Converts the object into a polars dataframe.
+
+        """
+        return pydantic_to_polars(
             self,
         )

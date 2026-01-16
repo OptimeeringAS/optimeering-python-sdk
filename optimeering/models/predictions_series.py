@@ -16,7 +16,15 @@ from warnings import warn
 
 import optimeering
 import orjson
-from optimeering.extras import pd, pydantic_to_pandas, require_pandas
+from optimeering.extras import (
+    pd,
+    polars,
+    pydantic_to_pandas,
+    pydantic_to_polars,
+    require_pandas,
+    require_polars,
+    require_pyarrow,
+)
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, model_validator
 
 
@@ -286,5 +294,18 @@ class PredictionsSeries(BaseModel):
 
         """
         return pydantic_to_pandas(
+            self,
+        )
+
+    @require_polars
+    @require_pyarrow
+    def to_polars(
+        self,
+    ) -> "polars.DataFrame":  # type: ignore[name-defined]
+        """
+        Converts the object into a polars dataframe.
+
+        """
+        return pydantic_to_polars(
             self,
         )

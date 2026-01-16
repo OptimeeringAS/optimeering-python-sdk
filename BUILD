@@ -19,7 +19,7 @@ python_distribution(
         ],
         description="Optimeering Python Client",
         long_description_content_type="text/markdown",
-        version="0.0.5",
+        version="0.0.6",
     ),
     wheel_config_settings={
         "--build-option": [
